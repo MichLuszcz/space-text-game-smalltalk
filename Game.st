@@ -10,6 +10,17 @@ Responsibilities:
 
 Collaborators:
 * Michał Łuszczek, Jędrzej Grabski, Aleksander Drwal"
+
+
+
+"TODOs:
+Lock class
+Door class
+implement move directions into Room
+"
+
+
+
 Object subclass: Game [
     | isGameOver inventory currentRoom|
 
@@ -118,21 +129,21 @@ Object subclass: Game [
             words := cmd substrings. "array of words"
 
         
-            "pick"
+            "pick TODO"
             words first = 'pick' ifTrue: [
                 self printInstructions.
                 Transcript show: 'sysy knyszy'; cr.
                 isUnknown := false
             ].
 
-            "inspect"
+            "inspect TODO"
             words first = 'inspect' ifTrue: [
                 self printInstructions.
                 Transcript show: 'sysy knyszy'; cr.
                 isUnknown := false
             ].
 
-            "open"
+            "open TODO"
             "has to add items to currentRoom"
             words first = 'open' ifTrue: [
                 self printInstructions.
@@ -141,7 +152,7 @@ Object subclass: Game [
             ].
 
 
-            "use"
+            "use TODO"
             words first = 'use' ifTrue: [
                 self printInstructions.
                 Transcript show: 'sysy knyszy'; cr.
@@ -157,14 +168,14 @@ Object subclass: Game [
                 isUnknown := false
             ].
 
-            "craft spacesuit"
+            "craft spacesuit TODO"
             words first = 'craft' ifTrue: [
                 self printInstructions.
                 Transcript show: 'sysy knyszy'; cr.
                 isUnknown := false
             ].
 
-            "check inventory or exits"
+            "check inventory or exits TODO"
             words first = 'check' ifTrue: [
                 words last = 'inventory' ifTrue: [
                     Transcript show: 'check inventory'; cr.
@@ -177,14 +188,14 @@ Object subclass: Game [
             ].
 
         
-            "move"
+            "move TODO"
             words first = 'move' ifTrue: [
                 self printInstructions.
                 Transcript show: 'sysy knyszy'; cr.
                 isUnknown := false
             ].
 
-            "connect cables?"
+            "connect cables? TODO"
             words first = 'connect' ifTrue: [
                 self printInstructions.
                 Transcript show: 'connect cables'; cr.
