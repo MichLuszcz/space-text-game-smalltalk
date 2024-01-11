@@ -146,7 +146,7 @@ Object subclass: Game [
                 isUnknown := false.
             ].
 
-            "inspect TODO"
+            "inspect"
             words first = 'inspect' ifTrue: [
                 foundObject := (currentRoom findObjectByName: (words last)).
 
