@@ -48,5 +48,11 @@ Object subclass: Room [
         ].
     ]
 
+        "Function to find a GameObject by name"
+    Room >> findObjectByName: aName [
+        ^gameObjects detect: [ :object | object getName = aName ] ifNone: [ nil ].
+    ]
+
+
 ]
 
