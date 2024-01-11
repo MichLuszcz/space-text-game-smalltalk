@@ -1,5 +1,5 @@
 Object subclass: GameObject [
-    | pickable description |
+    |name pickable description |
 
     "Initialize method"
     GameObject class >> new [
@@ -10,6 +10,7 @@ Object subclass: GameObject [
     GameObject >> initialize [
         pickable := false.
         description := 'Default description'.
+        name := 'default object name'.
         ^self
     ]
 
@@ -22,11 +23,19 @@ Object subclass: GameObject [
         pickable := aBoolean.
     ]
 
+    GameObject >> setName: newName [
+        name := newName.
+    ]
+
+    GameObject >> getName [
+        ^name
+    ]
+
     GameObject >> description [
         ^description
     ]
 
-    GameObject >> description: aString [
+    GameObject >> setDescription: aString [
         description := aString.
     ]
 
@@ -46,3 +55,6 @@ Object subclass: GameObject [
 
 
 
+"TODO: Make Locker class and Door class
+Locker : has things inside it, if opened will add things to room
+Door: has a direction and another room. If opened, will add connection to current room"

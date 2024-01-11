@@ -56,8 +56,8 @@ Object subclass: Game [
         isGameOver := false.
         inventory := OrderedCollection new.
         currentRoom := Room new.
+        currentRoom addGameObject: (GameObject new).
 
-        
     ]
 
     "Print strings from array in separate lines."
@@ -112,6 +112,9 @@ Object subclass: Game [
                 isUnknown := false
             ].
 
+            cmd isEmpty ifTrue: [
+                cmd := 'EMPTYCOMMANDSKIP'.
+            ].
             words := cmd substrings. "array of words"
 
         
@@ -149,6 +152,8 @@ Object subclass: Game [
             "look"
             words first = 'look' ifTrue: [
                 Transcript show: (currentRoom getDescription); cr.
+                "List objects in room"
+                currentRoom printObjects.
                 isUnknown := false
             ].
 

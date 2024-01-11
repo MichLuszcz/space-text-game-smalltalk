@@ -42,5 +42,11 @@ Object subclass: Room [
         Transcript show: 'Connections: ', connections asString; nl.
     ]
 
+    Room >> printObjects [
+        gameObjects do: [ :object |
+            Transcript show: (object getName), '.'; nl.
+        ].
+    ]
+
 ]
 
