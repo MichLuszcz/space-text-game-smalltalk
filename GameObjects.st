@@ -10,7 +10,7 @@ Object subclass: GameObject [
     GameObject >> initialize [
         pickable := false.
         description := 'Default description'.
-        name := 'default object name'.
+        name := 'defaultName'.
         ^self
     ]
 

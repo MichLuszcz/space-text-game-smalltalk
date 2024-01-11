@@ -102,7 +102,7 @@ Object subclass: Game [
     ]
     "Run the game."
     run [
-        | cmd isUnknown words|
+        | cmd isUnknown words foundObject|
 
         self printIntroduction.
         self printInstructions.
@@ -129,11 +129,22 @@ Object subclass: Game [
             words := cmd substrings. "array of words"
 
         
-            "pick TODO"
+            "pick"
             words first = 'pick' ifTrue: [
-                self printInstructions.
-                Transcript show: 'sysy knyszy'; cr.
-                isUnknown := false
+                foundObject := (currentRoom findObjectByName: (words last)).
+
+                foundObject
+                    ifNotNil: [
+                    Transcript show: 'Picked up.'; cr.
+                    currentRoom removeGameObject: foundObject.
+                    inventory add: foundObject.
+                    "Do something with the non-nil result, if needed."
+                    ]
+                    ifNil: [
+                    Transcript show: 'There is no such object in this room.'; cr.
+                    ].
+
+                isUnknown := false.
             ].
 
             "inspect TODO"
