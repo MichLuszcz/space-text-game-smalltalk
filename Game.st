@@ -189,7 +189,10 @@ Object subclass: Game [
             "check inventory or exits TODO"
             words first = 'check' ifTrue: [
                 words last = 'inventory' ifTrue: [
-                    Transcript show: 'check inventory'; cr.
+                    Transcript show: 'Inventory:'; cr.
+                    inventory do: [ :object |
+                    Transcript show: (object getName), '.'; nl.
+                    ].
                     isUnknown := false
                 ].
                 words last = 'exits' ifTrue: [
