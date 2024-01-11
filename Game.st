@@ -55,6 +55,8 @@ Object subclass: Game [
         FileStream fileIn: 'Room.st'.
         isGameOver := false.
         inventory := OrderedCollection new.
+        currentRoom := Room new.
+
         
     ]
 
@@ -146,8 +148,7 @@ Object subclass: Game [
 
             "look"
             words first = 'look' ifTrue: [
-                self printInstructions.
-                Transcript show: 'sysy knyszy'; cr.
+                Transcript show: (currentRoom getDescription); cr.
                 isUnknown := false
             ].
 

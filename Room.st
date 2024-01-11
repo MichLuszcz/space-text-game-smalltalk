@@ -4,9 +4,17 @@ Object subclass: Room [
 
     Room >> initialize [
         gameObjects := OrderedCollection new.
-        description := ''.
+        description := 'default description'.
         connections := OrderedCollection new: 4.
     ]
+
+    Room class >> new [
+        | g |
+        g := super new.
+        g initialize.
+        ^g
+    ]
+
 
     Room >> addGameObject: aGameObject [
         gameObjects add: aGameObject.
@@ -18,6 +26,10 @@ Object subclass: Room [
 
     Room >> setDescription: aDescription [
         description := aDescription.
+    ]
+
+    Room >> getDescription [
+        ^description.
     ]
 
     Room >> addConnection: aRoom withDescription: aConnectionDescription [
