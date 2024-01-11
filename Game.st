@@ -138,7 +138,6 @@ Object subclass: Game [
                     Transcript show: 'Picked up.'; cr.
                     currentRoom removeGameObject: foundObject.
                     inventory add: foundObject.
-                    "Do something with the non-nil result, if needed."
                     ]
                     ifNil: [
                     Transcript show: 'There is no such object in this room.'; cr.
@@ -149,12 +148,20 @@ Object subclass: Game [
 
             "inspect TODO"
             words first = 'inspect' ifTrue: [
-                self printInstructions.
-                Transcript show: 'sysy knyszy'; cr.
+                foundObject := (currentRoom findObjectByName: (words last)).
+
+                foundObject
+                    ifNotNil: [
+                    Transcript show: (foundObject description); cr.
+                    ]
+                    ifNil: [
+                    Transcript show: 'There is no such object in this room.'; cr.
+                    ].
+
                 isUnknown := false
             ].
 
-            "open TODO"
+            "open TODO can create paths"
             "has to add items to currentRoom"
             words first = 'open' ifTrue: [
                 self printInstructions.
@@ -163,7 +170,7 @@ Object subclass: Game [
             ].
 
 
-            "use TODO"
+            "use TODO, can create paths"
             words first = 'use' ifTrue: [
                 self printInstructions.
                 Transcript show: 'sysy knyszy'; cr.
