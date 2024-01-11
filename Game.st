@@ -76,6 +76,17 @@ Object subclass: Game [
         ^ FileStream stdin nextLine
     ]
 
+    checkInventory [
+
+    ]
+
+    checkExits [
+
+    ]
+
+    look [
+
+    ]
     "Run the game."
     run [
         | cmd isUnknown words|
@@ -102,6 +113,29 @@ Object subclass: Game [
             words := cmd substrings. "array of words"
 
         
+            "pick"
+            words first = 'pick' ifTrue: [
+                self printInstructions.
+                Transcript show: 'sysy knyszy'; cr.
+                isUnknown := false
+            ].
+
+            "inspect"
+            words first = 'inspect' ifTrue: [
+                self printInstructions.
+                Transcript show: 'sysy knyszy'; cr.
+                isUnknown := false
+            ].
+
+            "open"
+            "has to add items to currentRoom"
+            words first = 'open' ifTrue: [
+                self printInstructions.
+                Transcript show: 'sysy knyszy'; cr.
+                isUnknown := false
+            ].
+
+
             "use"
             words first = 'use' ifTrue: [
                 self printInstructions.
@@ -109,20 +143,48 @@ Object subclass: Game [
                 isUnknown := false
             ].
 
-            "open"
-            words first = 'open' ifTrue: [
+
+            "look"
+            words first = 'look' ifTrue: [
                 self printInstructions.
                 Transcript show: 'sysy knyszy'; cr.
                 isUnknown := false
             ].
 
-
-            "inspect"
-            words first = 'open' ifTrue: [
+            "craft spacesuit"
+            words first = 'craft' ifTrue: [
                 self printInstructions.
                 Transcript show: 'sysy knyszy'; cr.
                 isUnknown := false
             ].
+
+            "check inventory or exits"
+            words first = 'check' ifTrue: [
+                words last = 'inventory' ifTrue: [
+                    Transcript show: 'check inventory'; cr.
+                    isUnknown := false
+                ].
+                words last = 'exits' ifTrue: [
+                    Transcript show: 'check exits'; cr.
+                    isUnknown := false
+                ].                
+            ].
+
+        
+            "move"
+            words first = 'move' ifTrue: [
+                self printInstructions.
+                Transcript show: 'sysy knyszy'; cr.
+                isUnknown := false
+            ].
+
+            "connect cables?"
+            words first = 'connect' ifTrue: [
+                self printInstructions.
+                Transcript show: 'connect cables'; cr.
+                isUnknown := false
+            ].
+
 
 
 
