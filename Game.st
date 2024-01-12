@@ -61,6 +61,10 @@ Object subclass: Game [
         ^g
     ]
 
+    Game >> setCurrentRoom: room [
+        currentRoom := room.
+    ]
+
     init [
         FileStream fileIn: 'GameObjects.st'.
         FileStream fileIn: 'Room.st'.
