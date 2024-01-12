@@ -160,7 +160,7 @@ UnlockableObject subclass: DoorObject [
     Door >> open: currentRoom [
         locked ifFalse: [
             currentRoom addConnection: (connection getDirection) to: (connection getRoom).
-        ] ifTrue [
+        ] ifTrue: [
             Transcript show: 'You have to unlock it first!'.
         ].
     ]
