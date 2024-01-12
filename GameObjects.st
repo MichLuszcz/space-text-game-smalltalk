@@ -159,7 +159,7 @@ UnlockableObject subclass: DoorObject [
 
     Door >> open: currentRoom [
         locked ifFalse: [
-            currentRoom addConnection: connection.
+            currentRoom addConnection: (connection getDirection) to: (connection getRoom).
         ] ifTrue [
             Transcript show: 'You have to unlock it first!'.
         ].
@@ -168,6 +168,37 @@ UnlockableObject subclass: DoorObject [
 ]
 
 
+Object subclass: Connection [
+    |direction nextRoom|
+
+    Connection >> initializeConnection: direction to: room [
+        direction := direction.
+        nextRoom := room.
+        ^self
+    ]
+
+    Connection class >> new [
+        | g |
+        g := super new.
+        g initialize.
+        ^g
+    ]
+
+    Connection class >> newDirection: direction to: room [
+        | g |
+        g := super new.
+        g initializeConnection: direction to: room.
+        ^g
+    ]
+
+    Connection >> getDirection [
+        ^direction
+    ]
+
+    Connection >> getRoom [
+        ^nextRoom
+    ]
+]
 
 
 "TODO: Make Door class

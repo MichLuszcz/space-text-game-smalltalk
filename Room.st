@@ -77,35 +77,3 @@ Object subclass: Room [
     ]
 
 ]
-
-Object subclass: Connection [
-    |direction nextRoom|
-
-    Connection >> initializeConnection: direction to: room [
-        direction := direction.
-        nextRoom := room.
-        ^self
-    ]
-
-    Connection class >> new [
-        | g |
-        g := super new.
-        g initialize.
-        ^g
-    ]
-
-    Connection class >> newDirection: direction to: room [
-        | g |
-        g := super new.
-        g initializeConnection: direction to: room.
-        ^g
-    ]
-
-    Connection >> getDirection [
-        ^direction
-    ]
-
-    Connection >> getRoom [
-        ^nextRoom
-    ]
-]
