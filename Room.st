@@ -63,7 +63,8 @@ Object subclass: Room [
     ]
 
     Room >> getRoomOnThe: direction [
-        ^connection at: direction " throws KeyNotFound if none is found, handle in Game"
+        ^(connection at: direction) 
+        " throws KeyNotFound if none is found, handle in Game"
     ]
 
     Room >> listConnections [

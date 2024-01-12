@@ -213,7 +213,7 @@ Object subclass: Game [
                 isUnknown := false
             ].
 
-            "check inventory or exits TODO"
+            "check inventory or exits"
             words first = 'check' ifTrue: [
                 words last = 'inventory' ifTrue: [
                     Transcript show: 'Inventory:'; cr.
@@ -223,15 +223,23 @@ Object subclass: Game [
                     isUnknown := false
                 ].
                 words last = 'exits' ifTrue: [
-                    Transcript show: 'check exits'; cr.
+                    currentRoom listConnections.
                     isUnknown := false
                 ].                
             ].
 
         
             "move TODO"
-            words first = 'move' ifTrue: [
-                self printInstructions.
+            words first = 'move' & words size = 2 ifTrue: [
+                |newRoom|
+
+                [
+                newRoom := currentRoom.
+                currentRoom:= newRoom.
+                Transcript show: 'Moved to ', (currentRoom getRoomName); cr.
+                ] on: KeyNotFound do: [ :exception |
+                    Transcript show: 'You can''t go that way'; nl; cr.
+                ].
                 Transcript show: 'sysy knyszy'; cr.
                 isUnknown := false
             ].
