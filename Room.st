@@ -63,6 +63,10 @@ Object subclass: Room [
         ^gameObjects detect: [ :object | object getName = aName ] ifNone: [ nil ].
     ]
 
+    Room >> addConnection: direction to: room [
+        connections at: direction put: room.
+    ]
+    
     Room >> listConnections [
 
         connections keysAndValuesDo: [ :key :value |
@@ -99,5 +103,9 @@ Object subclass: Connection [
 
     Connection >> getDirection [
         ^direction
+    ]
+
+    Connection >> getRoom [
+        ^nextRoom
     ]
 ]
