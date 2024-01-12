@@ -87,7 +87,7 @@ GameObject subclass: InteractibleObject [
 
     "Adds items to current room after a correct thing is used on it"
     InteractibleObject >> use: aString inRoom: room [
-        triggerItemName = asString ifTrue: [
+        triggerItemName = aString ifTrue: [
             triggerAddedObjects do: [ :object |
                 room addGameObject: object.
             ].
@@ -131,7 +131,7 @@ InteractibleObject subclass: UnlockableObject [
             triggerAddedObjects do: [ :object |
                 currentRoom addGameObject: object.
             ].
-        ] ifTrue [
+        ] ifTrue: [
                 Transcript show: 'You have to unlock it first!'.
         ].
     ]
