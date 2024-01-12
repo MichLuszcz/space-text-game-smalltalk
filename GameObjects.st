@@ -40,7 +40,7 @@ Object subclass: GameObject [
     ]
 
     "Methods"
-    GameObject >> open inRoom: room [
+    GameObject >> open: room [
         Transcript show: 'You don''t know how to open this.'; cr.
     ]
 
