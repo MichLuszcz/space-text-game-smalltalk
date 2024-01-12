@@ -68,7 +68,7 @@ Object subclass: Game [
         inventory := OrderedCollection new.
         currentRoom := Room new.
         currentRoom addGameObject: (GameObject new).
-        currentRoom addGameObject: (UsableObject new).
+        currentRoom addGameObject: (InteractibleObject new).
 
     ]
 

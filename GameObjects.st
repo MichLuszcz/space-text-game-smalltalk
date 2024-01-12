@@ -54,34 +54,34 @@ Object subclass: GameObject [
 ]
 
 
-GameObject subclass: UsableObject [
+GameObject subclass: InteractibleObject [
     |triggerItemName triggerAddedObjects|
 
 
 
     "Initialize method"
-    UsableObject class >> new [
+    InteractibleObject class >> new [
         ^super new initialize
     ]
 
     "Initialization method"
-    UsableObject >> initialize [
+    InteractibleObject >> initialize [
         super initialize.
         triggerItemName := 'notValidItemName'.
         triggerAddedObjects := OrderedCollection new.
         ^self
     ]
 
-    UsableObject >> addTriggerObject: aGameObject [
+    InteractibleObject >> addTriggerObject: aGameObject [
         triggerAddedObjects add: aGameObject.
     ]
 
-    UsableObject >> removeTriggerObject: aGameObject [
+    InteractibleObject >> removeTriggerObject: aGameObject [
         triggerAddedObjects remove: aGameObject ifAbsent: [].
     ]
 
     "Adds items to current room after a correct thing is used on it"
-    UsableObject >> use: aString inRoom: room [
+    InteractibleObject >> use: aString inRoom: room [
         triggerItemName = asString ifTrue: [
             triggerAddedObjects do: [ :object |
                 room addGameObject: object.
@@ -91,9 +91,11 @@ GameObject subclass: UsableObject [
             Transcript show: 'You do not know how to use this in this manner.'; cr.
         ]
     ]
-
-
 ]
+
+
+
+
 
 
 "TODO: Make Locker class and Door class
