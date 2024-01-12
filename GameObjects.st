@@ -157,7 +157,7 @@ UnlockableObject subclass: DoorObject [
         connection := newConnection. " class = Connection"
     ]
 
-    Door >> open: currentRoom [
+    DoorObject >> open: currentRoom [
         locked ifFalse: [
             currentRoom addConnection: (connection getDirection) to: (connection getRoom).
         ] ifTrue: [
@@ -171,8 +171,8 @@ UnlockableObject subclass: DoorObject [
 Object subclass: Connection [
     |direction nextRoom|
 
-    Connection >> initializeConnection: direction to: room [
-        direction := direction.
+    Connection >> initializeConnection: newDirection to: room [
+        direction := newDirection.
         nextRoom := room.
         ^self
     ]
