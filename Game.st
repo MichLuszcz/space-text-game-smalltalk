@@ -90,17 +90,6 @@ Object subclass: Game [
         ^ FileStream stdin nextLine
     ]
 
-    checkInventory [
-
-    ]
-
-    checkExits [
-
-    ]
-
-    look [
-
-    ]
     "Run the game."
     run [
         | cmd isUnknown words foundObject|
@@ -162,17 +151,25 @@ Object subclass: Game [
                 isUnknown := false
             ].
 
-            "open TODO can create paths"
-            "has to add items to currentRoom"
+            "opens"
+            "has to add items to currentRoom, this happens in the Unlockable object"
             words first = 'open' ifTrue: [
-                self printInstructions.
-                Transcript show: 'sysy knyszy'; cr.
+                foundObject := currentRoom findObjectByName: (words last).
+                foundObject 
+                ifNotNil: [
+                    foundObject open: currentRoom.
+                ]
+                ifNil: [
+                    Transcript show: 'There is no such object in this room.'; cr.
+                ].
                 isUnknown := false
             ].
 
 
             "use TODO, can create paths"
-            words first = 'use' ifTrue: [
+            "use item1 on item2"
+            words first = 'use' & words size = 4 ifTrue: [
+                
                 self printInstructions.
                 Transcript show: 'sysy knyszy'; cr.
                 isUnknown := false
