@@ -267,4 +267,37 @@ Object subclass: Game [
     ]
 ]
 
-Game new run.
+
+|game room1 room2 object1 object2 object3|
+FileStream fileIn: 'GameObjects.st'.
+FileStream fileIn: 'Room.st'.
+
+
+room2 := Room new.
+room2 setName: 'room2'.
+
+object1 := GameObject new.
+object1 setName: 'obj1'; setDescription: 'desc1'; setPickable: true.
+object2 := InteractibleObject new.
+object2 setName: 'obj2'; setDescription: 'desc2'.
+object2 setTriggerItemName: 'obj1'; addTriggerObject: object3.
+object3 := DoorObject new.
+object3 setTriggerItemName: 'obj1'; setConnetion: (Connection newDirection: 'N' to: room2).
+object3 setName: 'door'; setLocked: false.
+
+object1 getName.
+object2 getName.
+object3 getName.
+
+room1 := Room new.
+room1 addGameObject: object1; addGameObject: object3.
+room1 setName: 'room1'.
+
+room2 addGameObject: object2.
+room2 addConnection: 'S' to: room1. 
+
+
+
+game := Game new.
+game setCurrentRoom: room2.
+game run.
