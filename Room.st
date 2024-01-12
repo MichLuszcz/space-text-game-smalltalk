@@ -41,11 +41,6 @@ Object subclass: Room [
         ^roomName.
     ]
 
-
-    Room >> addConnection: aRoom withDescription: aConnectionDescription [
-        connections add: (aRoom -> aConnectionDescription).
-    ]
-
     Room >> printDetails [
         Transcript show: 'Description: ', description; nl.
         Transcript show: 'GameObjects: ', gameObjects asString; nl.
@@ -66,7 +61,11 @@ Object subclass: Room [
     Room >> addConnection: direction to: room [
         connections at: direction put: room.
     ]
-    
+
+    Room >> getRoomOnThe: direction [
+        ^connection at: direction " throws KeyNotFound if none is found, handle in Game"
+    ]
+
     Room >> listConnections [
 
         connections keysAndValuesDo: [ :key :value |
