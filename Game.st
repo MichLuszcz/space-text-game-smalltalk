@@ -90,6 +90,11 @@ Object subclass: Game [
         ^ FileStream stdin nextLine
     ]
 
+    findObjectInInventory: aName [
+        ^inventory detect: [ :object | object getName = aName ] ifNone: [ nil ].
+    ]
+
+
     "Run the game."
     run [
         | cmd isUnknown words foundObject|
@@ -166,11 +171,28 @@ Object subclass: Game [
             ].
 
 
-            "use TODO, can create paths"
+            "use"
             "use item1 on item2"
             words first = 'use' & words size = 4 ifTrue: [
-                
-                self printInstructions.
+                |targetItem|
+
+                foundObject := self findObjectInInventory: (words at: 2).
+                targetItem := currentRoom findObjectByName: (words last).
+                foundObject 
+                ifNotNil: [
+                    targetItem
+                    ifNotNil: [
+                        Transcript show: 'using ', foundObject getName, ' on ', targetItem getName; cr.
+                        targetItem use: (foundObject getName) inRoom: currentRoom.
+                    ]
+                    ifNil: [
+                        Transcript show: 'Target item not found in this room'; nl.
+                        Transcript show: 'You do have ', foundObject getName; nl; cr.
+                    ].
+                ]
+                ifNil: [
+                    Transcript show: 'You dont have that object.'; cr.
+                ].
                 Transcript show: 'sysy knyszy'; cr.
                 isUnknown := false
             ].
