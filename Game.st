@@ -134,9 +134,14 @@ Object subclass: Game [
 
                 foundObject
                     ifNotNil: [
-                    Transcript show: 'Picked up.'; cr.
-                    currentRoom removeGameObject: foundObject.
-                    inventory add: foundObject.
+                        foundObject pickable ifTrue: [
+                            Transcript show: 'Picked up.'; cr.
+                            currentRoom removeGameObject: foundObject.
+                            inventory add: foundObject.
+                        ] ifFalse: [
+                            Transcript show: 'You can''t pick this up'; nl.
+                        ].
+                    
                     ]
                     ifNil: [
                     Transcript show: 'There is no such object in this room.'; cr.
