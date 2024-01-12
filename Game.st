@@ -229,31 +229,27 @@ Object subclass: Game [
             ].
 
         
-            "move TODO"
+            "move"
             words first = 'move' & words size = 2 ifTrue: [
                 |newRoom|
 
-                [
-                newRoom := currentRoom.
-                currentRoom:= newRoom.
-                Transcript show: 'Moved to ', (currentRoom getRoomName); cr.
-                ] on: KeyNotFound do: [ :exception |
-                    Transcript show: 'You can''t go that way'; nl; cr.
-                ].
+                newRoom := currentRoom getRoomOnThe: (words last).
+                newRoom ifNotNil: [
+                    currentRoom:= newRoom.
+                    Transcript show: 'Moved to ', (currentRoom getRoomName); cr.
+                    ] ifNil: [
+                    Transcript show: 'You can''t go that way.'; nl.
+                    ].
+                
                 Transcript show: 'sysy knyszy'; cr.
                 isUnknown := false
             ].
 
             "connect cables? TODO"
             words first = 'connect' ifTrue: [
-                self printInstructions.
                 Transcript show: 'connect cables'; cr.
                 isUnknown := false
             ].
-
-
-
-
                 
             isUnknown ifTrue: [
                 self printLines: #('Unknown command.' '')

@@ -63,7 +63,7 @@ Object subclass: Room [
     ]
 
     Room >> getRoomOnThe: direction [
-        ^(connections at: direction) 
+        ^(connections at: direction ifAbsent: [nil]) 
         " throws KeyNotFound if none is found, handle in Game"
     ]
 
