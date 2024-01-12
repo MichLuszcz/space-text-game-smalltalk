@@ -15,11 +15,11 @@ Object subclass: GameObject [
     ]
 
     "Accessors"
-    GameObject >> pickable [
+    GameObject >> getPickable [
         ^pickable
     ]
 
-    GameObject >> pickable: aBoolean [
+    GameObject >> setPickable: aBoolean [
         pickable := aBoolean.
     ]
 

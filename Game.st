@@ -134,7 +134,7 @@ Object subclass: Game [
 
                 foundObject
                     ifNotNil: [
-                        foundObject pickable ifTrue: [
+                        foundObject getPickable ifTrue: [
                             Transcript show: 'Picked up.'; cr.
                             currentRoom removeGameObject: foundObject.
                             inventory add: foundObject.
