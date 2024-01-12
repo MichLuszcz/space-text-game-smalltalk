@@ -40,7 +40,7 @@ Object subclass: GameObject [
     ]
 
     "Methods"
-    GameObject >> open [
+    GameObject >> open inRoom: room [
         Transcript show: 'You don''t know how to open this.'; cr.
     ]
 
@@ -80,6 +80,11 @@ GameObject subclass: InteractibleObject [
         triggerAddedObjects remove: aGameObject ifAbsent: [].
     ]
 
+    InteractibleObject >> setTriggerItemName: newName [
+        triggerItemName := newName.
+    ]
+
+
     "Adds items to current room after a correct thing is used on it"
     InteractibleObject >> use: aString inRoom: room [
         triggerItemName = asString ifTrue: [
@@ -94,6 +99,42 @@ GameObject subclass: InteractibleObject [
 ]
 
 
+InteractibleObject subclass: UnlockableObject [
+    | locked |
+    "Initialize method"
+    UnlockableObject class >> new [
+        ^super new initialize
+    ]
+
+    "Initialization method"
+    UnlockableObject>> initialize [
+        super initialize.
+        locked := true.
+        ^self
+    ]
+
+    UnlockableObject >> setLocked: aBoolean [
+        locked := aBoolean.
+    ]
+
+    UnlockableObject >> use: aString inRoom: room [
+        triggerItemName = asString ifTrue: [
+            locked := false.
+            Transcript show: 'You unlock ', name; cr.
+        ] ifFalse: [
+            Transcript show: 'You do not know how to use this in this manner.'; cr.
+        ]
+    ]
+
+    UnlockableObject >> open inRoom: room[
+        locked ifFalse: [
+            triggerAddedObjects do: [ :object |
+                room addGameObject: object.
+            ].
+        ]
+    ]
+
+]
 
 
 
