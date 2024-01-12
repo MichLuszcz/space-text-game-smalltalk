@@ -44,7 +44,7 @@ Object subclass: GameObject [
         Transcript show: 'You don''t know how to open this.'; cr.
     ]
 
-    GameObject >> use: aString [
+    GameObject >> use: aString inRoom: room [
         Transcript show: 'You don''t know how to use this.'; cr.
     ]
 
