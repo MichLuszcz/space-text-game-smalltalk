@@ -118,7 +118,7 @@ InteractibleObject subclass: UnlockableObject [
     ]
 
     UnlockableObject >> use: aString inRoom: room [
-        triggerItemName = asString ifTrue: [
+        triggerItemName = aString ifTrue: [
             locked := false.
             Transcript show: 'You unlock ', name; cr.
         ] ifFalse: [
@@ -138,7 +138,34 @@ InteractibleObject subclass: UnlockableObject [
 ]
 
 
+UnlockableObject subclass: DoorObject [
+    |connection |
 
+
+    "Initialize method"
+    DoorObject class >> new [
+        ^super new initialize
+    ]
+
+    "Initialization method"
+    DoorObject >> initialize [
+        super initialize.
+        ^self
+    ]
+
+    DoorObject >> setConnetion: newConnection [
+        connection := newConnection. " class = Connection"
+    ]
+
+    Door >> open: currentRoom [
+        locked ifFalse: [
+            currentRoom addConnection: connection.
+        ] ifTrue [
+            Transcript show: 'You have to unlock it first!'.
+        ].
+    ]
+
+]
 
 
 
