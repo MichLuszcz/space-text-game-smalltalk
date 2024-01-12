@@ -1,11 +1,12 @@
 Object subclass: Room [
 
-    | gameObjects description connections |
+    | gameObjects description connections roomName |
 
     Room >> initialize [
         gameObjects := OrderedCollection new.
         description := 'default description'.
-        connections := OrderedCollection new: 4.
+        roomName := 'default room name'.
+        connections := Dictionary new.
     ]
 
     Room class >> new [
@@ -32,6 +33,15 @@ Object subclass: Room [
         ^description.
     ]
 
+    Room >> setName: newName [
+        roomName := newName.
+    ]
+
+    Room >> getRoomName [
+        ^roomName.
+    ]
+
+
     Room >> addConnection: aRoom withDescription: aConnectionDescription [
         connections add: (aRoom -> aConnectionDescription).
     ]
@@ -53,6 +63,41 @@ Object subclass: Room [
         ^gameObjects detect: [ :object | object getName = aName ] ifNone: [ nil ].
     ]
 
+    Room >> listConnections [
+
+        connections keysAndValuesDo: [ :key :value |
+        Transcript
+        show: 'Direction: ', key asString, ' To: ', (value getRoomName) asString;
+        cr.
+        ].
+    ]
 
 ]
 
+Object subclass: Connection [
+    |direction nextRoom|
+
+    Connection >> initializeConnection: direction to: room [
+        direction := direction.
+        nextRoom := room.
+        ^self
+    ]
+
+    Connection class >> new [
+        | g |
+        g := super new.
+        g initialize.
+        ^g
+    ]
+
+    Connection class >> newDirection: direction to: room [
+        | g |
+        g := super new.
+        g initializeConnection: direction to: room.
+        ^g
+    ]
+
+    Connection >> getDirection [
+        ^direction
+    ]
+]
