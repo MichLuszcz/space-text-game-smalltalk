@@ -94,7 +94,7 @@ GameObject subclass: InteractibleObject [
             Transcript show: 'You DO know how to use this.'; cr.
         ] ifFalse: [
             Transcript show: 'You do not know how to use this in this manner.'; cr.
-        ]
+        ].
     ]
 ]
 
@@ -123,22 +123,26 @@ InteractibleObject subclass: UnlockableObject [
             Transcript show: 'You unlock ', name; cr.
         ] ifFalse: [
             Transcript show: 'You do not know how to use this in this manner.'; cr.
-        ]
+        ].
     ]
 
-    UnlockableObject >> open inRoom: room[
+    UnlockableObject >> open: currentRoom [
         locked ifFalse: [
             triggerAddedObjects do: [ :object |
-                room addGameObject: object.
+                currentRoom addGameObject: object.
             ].
-        ]
+        ] ifTrue [
+                Transcript show: 'You have to unlock it first!'.
+        ].
     ]
-
 ]
 
 
 
 
-"TODO: Make Locker class and Door class
+
+
+
+"TODO: Make Door class
 Locker : has things inside it, if opened will add things to room
 Door: has a direction and another room. If opened, will add connection to current room"
