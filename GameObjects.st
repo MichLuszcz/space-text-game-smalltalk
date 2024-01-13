@@ -144,6 +144,10 @@ InteractibleObject subclass: UnlockableObject [
         ].
     ]
 
+    UnlockableObject >> setOpenMessage: newMessage [
+        openMessage := newMessage.
+    ]
+
     UnlockableObject >> open: currentRoom [
         locked ifFalse: [
             triggerAddedObjects do: [ :object |
@@ -171,10 +175,6 @@ UnlockableObject subclass: DoorObject [
         super initialize.
         openMessage := 'You open the door'.
         ^self
-    ]
-
-    DoorObject >> setOpenMessage: newMessage [
-        openMessage := newMessage.
     ]
 
     DoorObject >> setConnetion: newConnection [
