@@ -326,7 +326,7 @@ alien_mass setDescription: 'A strange black mass near the *workshop_window* bloc
 Underneath it you see one of your colleagues being slowly absorbed by what you assume to be some kind of alien intruder.
 A familiar smell of fuel fumes seems to be emanating from the creature.
 It might be flammable'.
-"set usable thing"
+"TODO set usable thing"
 
 toolbox := UnlockableObject new.
 toolbox setName: 'toolbox'.
@@ -367,6 +367,29 @@ You might be able to detach it if you had the proper tool.'.
 table setPickable: false.
 
 
+closed_computer := UnlockableObject new.
+closed_computer setName: 'closed_computer'.
+closed_computer setDescription: 'A closed laptop'.
+closed_computer setPickable: false.
+closed_computer setLocked: false.
+"TODO add items"
+
+
+opened_computer := GameObject new.
+opened_computer setName: 'opened_computer'.
+opened_computer setDescription: 'You open the closed computer sitting on the desk. You find an open email titled ESCAPE POD CODE UPDATE:
+Hi, Qaux''ods, please remember about the annual escape pod tests. We''ve changed all the codes to *1867* for this week to make the process easier.
+Please have the report done by next week. Cheers.'.
+opened_computer setPickable: false.
+
+metal_statue := GameObject new.
+metal_statue setName: 'metal_statue'.
+metal_statue setDescription: 'A heavy metal statue seems to have fallen down from one of the shelves and broken through a glass table.
+It''s just small enough for you to pick up and seems to be some kind of award given to the engineering chief.'.
+metal_statue setPickable: true.
+
+
+"MICHAL ROOMS"
 workshop := Room new.
 workshop setDescription: 'A strange black mass near the *workshop_window* blocks the path south. It pulsates slightly, as if breathing.
 Underneath it you see one of your colleagues being slowly absorbed by what you assume to be some kind of alien intruder.
@@ -384,6 +407,8 @@ escape_pods setDescription: 'This room is designed to hold the emergency evacuat
 All of them have either already been deployed, or are now covered in an alien, dark grey substance similar to the one that blocked the entrance to this room.
 All except for one. You have to move fast. The pods must first be lowered using the console.
 Then, once inside one of the pods, access to launch has to be granted by entering a code known to the managers of a given branch of the station.'.
+
+
 
 
 "workshop addConnection: 'W' to: engine_room."
