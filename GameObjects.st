@@ -139,7 +139,7 @@ InteractibleObject subclass: UnlockableObject [
 
 
 UnlockableObject subclass: DoorObject [
-    |connection |
+    |connection openMessage|
 
 
     "Initialize method"
@@ -150,7 +150,12 @@ UnlockableObject subclass: DoorObject [
     "Initialization method"
     DoorObject >> initialize [
         super initialize.
+        openMessage := 'You open the door'.
         ^self
+    ]
+
+    DoorObject >> setOpenMessage: newMessage [
+        openMessage := newMessage.
     ]
 
     DoorObject >> setConnetion: newConnection [
@@ -160,7 +165,7 @@ UnlockableObject subclass: DoorObject [
     DoorObject >> open: currentRoom [
         locked ifFalse: [
             currentRoom addConnection: (connection getDirection) to: (connection getRoom).
-            Transcript show: 'You open the door'; nl.
+            Transcript show: openMessage; nl.
             "currentRoom removeGameObject: self."
         ] ifTrue: [
             Transcript show: 'You have to unlock it first!'.
