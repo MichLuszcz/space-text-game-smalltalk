@@ -322,9 +322,23 @@ room2 addConnection: 'S' to: room1.
 
 
 workshop := Room new.
-workshop set
+workshop setDescription: 'A strange black mass near the *workshop_window* blocks the path south. It pulsates slightly, as if breathing.
+Underneath it you see one of your colleagues being slowly absorbed by what you assume to be some kind of alien intruder.
+A familiar smell of fuel fumes seems to be emanating from the creature.
+It might be flammable'.
+
 engineering_chief_office := Room new.
+engineering_chief_office setName: 'engineering_chief_office'.
+setDescription: 'The office is in heavy disarray. A closed computer sits on the desk. 
+Next to one of the bookshelves lays a broken glass table. Something heavy must''ve fallen on it from one of the shelves.'.
+
 escape_pods := Room new.
+escape_pods setName: 'escape_pods'.
+escape_pods setDescription: 'This room is designed to hold the emergency evacuation modules for the engineering staff.
+All of them have either already been deployed, or are now covered in an alien, dark grey substance similar to the one that blocked the entrance to this room.
+All except for one. You have to move fast. The pods must first be lowered using the console.
+Then, once inside one of the pods, access to launch has to be granted by entering a code known to the managers of a given branch of the station.'.
+
 
 "workshop addConnection: 'W' to: engine_room."
 
