@@ -160,6 +160,8 @@ UnlockableObject subclass: DoorObject [
     DoorObject >> open: currentRoom [
         locked ifFalse: [
             currentRoom addConnection: (connection getDirection) to: (connection getRoom).
+            Transcript show: 'You open the door'; nl.
+            "currentRoom removeGameObject: self."
         ] ifTrue: [
             Transcript show: 'You have to unlock it first!'.
         ].
