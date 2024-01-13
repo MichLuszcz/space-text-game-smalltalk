@@ -275,11 +275,11 @@ Object subclass: Game [
     "olek"
     "jedrek"
 "picakble objects"
-    "michal" object1 hand_saw electrical_tools wooden_table_leg
+    "michal" object1 hand_saw electrical_tools wooden_table_leg metal_statue makeshift_torch code_1867
     "olek"
     "jedrek"  
 "room objects" 
-    "michal" object2 alien_mass toolbox small_fire workshop_window
+    "michal" object2 alien_mass toolbox small_fire workshop_window table closed_computer opened_computer broken_console escape_pod_launch_console
     "olek"
     "jedrek"
 "doors" 
@@ -388,6 +388,26 @@ metal_statue setDescription: 'A heavy metal statue seems to have fallen down fro
 It''s just small enough for you to pick up and seems to be some kind of award given to the engineering chief.'.
 metal_statue setPickable: true.
 
+broken_console := InteractibleObject new.
+broken_console setName: 'broken_console'.
+broken_console setDescription: 'A console used for lowering the escape pods, broken. Looks like it short-circuited.
+You spot some black matter between the wires. This must be what caused the break.
+Needs specialized tools to be fixed.'.
+
+escape_pod_launch_console := InteractibleObject new.
+escape_pod_launch_console setName: 'escape_pod_launch_console'.
+escape_pod_launch_console setDescription: 'Inside the pod is a big screen with a prompt that reads:
+PLEASE ENTER LAUNCH AUTHORIZATION CODE TO INITIATE LAUNCH SEQUENCE'.
+
+makeshift_torch := GameObject new.
+makeshift_torch setName: 'makeshift_torch'.
+makeshift_torch setDescription: 'A torch fashioned from a wooden table leg.'.
+makeshift_torch setPickable: true.
+
+code_1867 := GameObject new.
+code_1867 setName: 'code_1867'.
+code_1867 setDescription: 'A code to a numerical lock'.
+code_1867 setPickable: true.
 
 "MICHAL ROOMS"
 workshop := Room new.
