@@ -271,7 +271,7 @@ Object subclass: Game [
 "game" |game 
 
 "rooms"
-    "michal" room1 room2
+    "michal" room1 room2 workshop engineering_chief_office escape_pods
     "olek"
     "jedrek"
 "picakble objects"
@@ -318,6 +318,20 @@ room1 setName: 'room1'.
 
 room2 addGameObject: object2.
 room2 addConnection: 'S' to: room1. 
+
+
+
+workshop := Room new.
+workshop set
+engineering_chief_office := Room new.
+escape_pods := Room new.
+
+"workshop addConnection: 'W' to: engine_room."
+
+
+
+
+
 
 
 
