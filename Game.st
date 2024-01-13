@@ -268,9 +268,32 @@ Object subclass: Game [
 ]
 
 
-|game room1 room2 object1 object2 object3|
+"game" |game 
+
+"rooms"
+    "michal" room1 room2
+    "olek"
+    "jedrek"
+"picakble objects"
+    "michal" object1
+    "olek"
+    "jedrek"  
+"room objects" 
+    "michal" object2
+    "olek"
+    "jedrek"
+"doors" 
+    "michal" object3
+    "olek"
+    "jedrek" |
+
+
+
+
 FileStream fileIn: 'GameObjects.st'.
 FileStream fileIn: 'Room.st'.
+
+
 
 
 room2 := Room new.
