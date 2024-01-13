@@ -303,7 +303,7 @@ object1 := GameObject new.
 object1 setName: 'obj1'; setDescription: 'desc1'; setPickable: true.
 object2 := InteractibleObject new.
 object2 setName: 'obj2'; setDescription: 'desc2'.
-object2 setTriggerItemName: 'obj1'; addTriggerObject: object3.
+object2 setTriggerItemName: 'obj1'; addTriggerAddedObject: object3.
 object3 := DoorObject new.
 object3 setTriggerItemName: 'obj1'; setConnetion: (Connection newDirection: 'N' to: room2).
 object3 setName: 'door'; setLocked: false.

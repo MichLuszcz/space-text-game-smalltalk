@@ -55,7 +55,7 @@ Object subclass: GameObject [
 
 
 GameObject subclass: InteractibleObject [
-    |triggerItemName triggerAddedObjects triggerRemovedObjects|
+    |triggerItemName triggerAddedObjects triggerRemovedObjects triggerMessage|
 
 
 
@@ -70,6 +70,7 @@ GameObject subclass: InteractibleObject [
         triggerItemName := 'notValidItemName'.
         triggerAddedObjects := OrderedCollection new.
         triggerRemovedObjects := OrderedCollection new.
+        triggerMessage := 'You know how to use it'.
         ^self
     ]
 
@@ -93,6 +94,9 @@ GameObject subclass: InteractibleObject [
         triggerItemName := newName.
     ]
 
+    InteractibleObject >> setTriggerMessage: newMessage [
+        triggerMessage := newMessage.
+    ]
 
     "Adds items to current room after a correct thing is used on it"
     InteractibleObject >> use: aString inRoom: room [
@@ -103,7 +107,7 @@ GameObject subclass: InteractibleObject [
             triggerRemovedObjects do: [ :object |
                 room removeGameObject: object
             ].
-            Transcript show: 'You DO know how to use this.'; cr.
+            Transcript show: triggerMessage; cr.
         ] ifFalse: [
             Transcript show: 'You do not know how to use this in this manner.'; cr.
         ].
@@ -112,7 +116,7 @@ GameObject subclass: InteractibleObject [
 
 
 InteractibleObject subclass: UnlockableObject [
-    | locked |
+    | locked openMessage|
     "Initialize method"
     UnlockableObject class >> new [
         ^super new initialize
@@ -122,6 +126,8 @@ InteractibleObject subclass: UnlockableObject [
     UnlockableObject>> initialize [
         super initialize.
         locked := true.
+        triggerMessage := 'You unlock it.'.
+        openMessage := 'You open it'.
         ^self
     ]
 
@@ -132,7 +138,7 @@ InteractibleObject subclass: UnlockableObject [
     UnlockableObject >> use: aString inRoom: room [
         triggerItemName = aString ifTrue: [
             locked := false.
-            Transcript show: 'You unlock ', name; cr.
+            Transcript show: triggerMessage; cr.
         ] ifFalse: [
             Transcript show: 'You do not know how to use this in this manner.'; cr.
         ].
@@ -143,15 +149,16 @@ InteractibleObject subclass: UnlockableObject [
             triggerAddedObjects do: [ :object |
                 currentRoom addGameObject: object.
             ].
+            Transcript show: openMessage; nl.
         ] ifTrue: [
-                Transcript show: 'You have to unlock it first!'.
+                Transcript show: 'You have to unlock it first!'; nl.
         ].
     ]
 ]
 
 
 UnlockableObject subclass: DoorObject [
-    |connection openMessage|
+    |connection|
 
 
     "Initialize method"
