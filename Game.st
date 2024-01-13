@@ -191,7 +191,7 @@ Object subclass: Game [
                 ifNotNil: [
                     targetItem
                     ifNotNil: [
-                        Transcript show: 'using ', foundObject getName, ' on ', targetItem getName; cr.
+                        "Transcript show: 'using ', foundObject getName, ' on ', targetItem getName; cr."
                         targetItem use: (foundObject getName) inRoom: currentRoom.
                     ]
                     ifNil: [
@@ -367,25 +367,35 @@ workshop_window setName: 'workshop_window'.
 workshop_window setDescription: 'You look at the window and into space. You see pieces of debris coming from the ship as well as some strange black round objects you can''t identify.
 Can be broken with enough force. Last time this happened 2 workers got sucked out into space.'.
 workshop_window setPickable: false.
+workshop_window setTriggerItemName: 'metal_statue'.
+workshop_window addTriggerAddedObject: escape_pods_door.
+workshop_window addTriggerRemovedObject: workshop_window; addTriggerRemovedObject: alien_mass.
+
+makeshift_torch := GameObject new.
+makeshift_torch setName: 'makeshift_torch'.
+makeshift_torch setDescription: 'A torch fashioned from a wooden table leg.'.
+makeshift_torch setPickable: true.
+
 
 small_fire := InteractibleObject new.
 small_fire setName: 'small_fire'.
 small_fire setDescription: 'A small electrical fire seems to have broken out in the corner of the room'.
 small_fire setPickable: false.
+small_fire addTriggerAddedObject: makeshift_torch.
+small_fire setTriggerItemName: 'wooden_table_leg'.
+small_fire setTriggerMessage: 'You leave the table leg near the fire until it catches fire, creating a *makeshift_torch*'
 
 table := InteractibleObject new.
 table setName: 'table'.
 table setDescription: 'An old wooden table. One of its legs seems to be barely holding on.
 You might be able to detach it if you had the proper tool.'.
 table setPickable: false.
+table setTriggerItemName: 'hand_saw'.
+table addTriggerAddedObject: wooden_table_leg.
+table addTriggerRemovedObject: table.
+table setTriggerMessage: 'You manage to sever the loose leg with your saw.
+A *wooden_table_leg* lies on the floor' "add The second the leg comes off the saw breaks"
 
-
-closed_computer := UnlockableObject new.
-closed_computer setName: 'closed_computer'.
-closed_computer setDescription: 'A closed laptop'.
-closed_computer setPickable: false.
-closed_computer setLocked: false.
-"TODO add items"
 
 
 opened_computer := GameObject new.
@@ -395,32 +405,60 @@ Hi, Qaux''ods, please remember about the annual escape pod tests. We''ve changed
 Please have the report done by next week. Cheers.'.
 opened_computer setPickable: false.
 
+code_1867 := GameObject new.
+code_1867 setName: 'code_1867'.
+code_1867 setDescription: 'A code to a numerical lock'.
+code_1867 setPickable: true.
+
+
+closed_computer := UnlockableObject new.
+closed_computer setName: 'closed_computer'.
+closed_computer setDescription: 'A closed laptop'.
+closed_computer setPickable: false.
+closed_computer setLocked: false.
+closed_computer addTriggerAddedObject: opened_computer; addTriggerAddedObject: code_1867.
+closed_computer addTriggerRemovedObject: closed_computer.
+closed_computer setOpenMessage: 'You open the closed computer sitting on the desk. You find an open email titled ESCAPE POD CODE UPDATE:
+Hi, Qaux''ods, please remember about the annual escape pod tests. We''ve changed all the codes to *1867* for this week to make the process easier.
+Please have the report done by next week. Cheers'
+
+
+
+
 metal_statue := GameObject new.
 metal_statue setName: 'metal_statue'.
 metal_statue setDescription: 'A heavy metal statue seems to have fallen down from one of the shelves and broken through a glass table.
 It''s just small enough for you to pick up and seems to be some kind of award given to the engineering chief.'.
 metal_statue setPickable: true.
 
+escape_pod_launch_console := InteractibleObject new.
+escape_pod_launch_console setName: 'escape_pod_launch_console'.
+escape_pod_launch_console setDescription: 'Inside the pod is a big screen with a prompt that reads:
+PLEASE ENTER LAUNCH AUTHORIZATION CODE TO INITIATE LAUNCH SEQUENCE'.
+escape_pod_launch_console setTriggerItemName: 'code_1867';
+setTriggerMessage: 'You punch in the code. The door to the pod closes behind you and you hear a robotic voice come from the console: 
+Voice: Launch sequence initiated. Please take a seat and fasten your seatbelts. 
+
+You sit down and hope for the best. After a 20 second countdown the pod begins to shake and propels itself out of the station.
+You made it. As you''re leaving the station you see the ship is covered in a moving blanket of black material. 
+You live to tell the tale. You try contacting the closest colony and explain the situation. You get permission for emergency landing.
+Congratulations! You managed to escape the station!
+
+Type "quit" to end the game.'
+
 broken_console := InteractibleObject new.
 broken_console setName: 'broken_console'.
 broken_console setDescription: 'A console used for lowering the escape pods, broken. Looks like it short-circuited.
 You spot some black matter between the wires. This must be what caused the break.
 Needs specialized tools to be fixed.'.
+broken_console setTriggerItemName: 'electrical_tools'; 
+addTriggerAddedObject: escape_pod_launch_console; 
+addTriggerRemovedObject: broken_console.
 
-escape_pod_launch_console := InteractibleObject new.
-escape_pod_launch_console setName: 'escape_pod_launch_console'.
-escape_pod_launch_console setDescription: 'Inside the pod is a big screen with a prompt that reads:
-PLEASE ENTER LAUNCH AUTHORIZATION CODE TO INITIATE LAUNCH SEQUENCE'.
 
-makeshift_torch := GameObject new.
-makeshift_torch setName: 'makeshift_torch'.
-makeshift_torch setDescription: 'A torch fashioned from a wooden table leg.'.
-makeshift_torch setPickable: true.
 
-code_1867 := GameObject new.
-code_1867 setName: 'code_1867'.
-code_1867 setDescription: 'A code to a numerical lock'.
-code_1867 setPickable: true.
+
+
 
 "MICHAL ROOMS"
 workshop := Room new.
