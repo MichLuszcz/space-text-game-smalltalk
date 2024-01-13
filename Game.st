@@ -383,7 +383,7 @@ small_fire setDescription: 'A small electrical fire seems to have broken out in 
 small_fire setPickable: false.
 small_fire addTriggerAddedObject: makeshift_torch.
 small_fire setTriggerItemName: 'wooden_table_leg'.
-small_fire setTriggerMessage: 'You leave the table leg near the fire until it catches fire, creating a *makeshift_torch*'
+small_fire setTriggerMessage: 'You leave the table leg near the fire until it catches fire, creating a *makeshift_torch*'.
 
 table := InteractibleObject new.
 table setName: 'table'.
@@ -394,7 +394,7 @@ table setTriggerItemName: 'hand_saw'.
 table addTriggerAddedObject: wooden_table_leg.
 table addTriggerRemovedObject: table.
 table setTriggerMessage: 'You manage to sever the loose leg with your saw.
-A *wooden_table_leg* lies on the floor' "add The second the leg comes off the saw breaks"
+A *wooden_table_leg* lies on the floor'. "add The second the leg comes off the saw breaks"
 
 
 
@@ -420,7 +420,7 @@ closed_computer addTriggerAddedObject: opened_computer; addTriggerAddedObject: c
 closed_computer addTriggerRemovedObject: closed_computer.
 closed_computer setOpenMessage: 'You open the closed computer sitting on the desk. You find an open email titled ESCAPE POD CODE UPDATE:
 Hi, Qaux''ods, please remember about the annual escape pod tests. We''ve changed all the codes to *1867* for this week to make the process easier.
-Please have the report done by next week. Cheers'
+Please have the report done by next week. Cheers'.
 
 
 
@@ -444,7 +444,7 @@ You made it. As you''re leaving the station you see the ship is covered in a mov
 You live to tell the tale. You try contacting the closest colony and explain the situation. You get permission for emergency landing.
 Congratulations! You managed to escape the station!
 
-Type "quit" to end the game.'
+Type "quit" to end the game.'.
 
 broken_console := InteractibleObject new.
 broken_console setName: 'broken_console'.
@@ -462,7 +462,7 @@ addTriggerRemovedObject: broken_console.
 
 "MICHAL ROOMS"
 workshop := Room new.
-workshop setDescription: '"The workshop is where most engineering on the station happens.
+workshop setDescription: 'The workshop is where most engineering on the station happens.
 A door North leads to the engineering chiefs office, a South one to the escape pods'.
 workshop addGameObject: engineering_chief_office_door; addGameObject: table; addGameObject: small_fire; addGameObject: alien_mass;
 addGameObject:workshop_window; addGameObject: toolbox.
