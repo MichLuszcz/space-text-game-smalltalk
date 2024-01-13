@@ -283,7 +283,7 @@ Object subclass: Game [
     "olek"
     "jedrek"
 "doors" 
-    "michal" object3
+    "michal" object3 engineering_chief_office_door escape_pods_door
     "olek"
     "jedrek" |
 
@@ -320,19 +320,23 @@ room2 addGameObject: object2.
 room2 addConnection: 'S' to: room1. 
 
 
+engineering_chief_office_door := DoorObject new.
+engineering_chief_office_door setTriggerItemName: 'engineering_chief_access_card';
+setName: 'engineering_chief_office_door'.
+
+escape_pods_door := DoorObject new.
+escape_pods_door setLocked: false;
+setName: 'escape_pods_door'.
+
 alien_mass := InteractibleObject new.
 alien_mass setName: 'alien_mass'.
 alien_mass setDescription: 'A strange black mass near the *workshop_window* blocks the path south. It pulsates slightly, as if breathing.
 Underneath it you see one of your colleagues being slowly absorbed by what you assume to be some kind of alien intruder.
 A familiar smell of fuel fumes seems to be emanating from the creature.
 It might be flammable'.
-"TODO set usable thing"
-
-toolbox := UnlockableObject new.
-toolbox setName: 'toolbox'.
-toolbox setDescription: 'Standard-issue toolbox. It''s unlocked'.
-toolbox setPickable: false.
-toolbox setLocked: false. "It's unlocked"
+alien_mass setTriggerItemName: 'makeshift_torch'.
+alien_mass addTriggerRemovedObject: alien_mass; addTriggerAddedObject: escape_pods_door.
+alien_mass setTriggerMessage: 'The alien mass burns away, revealing a door to the South leading to the escape pods!'.
 
 hand_saw := GameObject new.
 hand_saw setName: 'hand_saw'.
@@ -343,6 +347,15 @@ electrical_tools := GameObject new.
 electrical_tools setName: 'electrical_tools'.
 electrical_tools setDescription: 'Various tools for electrical work such as wire cutters, soldering iron etc.'.
 electrical_tools setPickable: true.
+
+toolbox := UnlockableObject new.
+toolbox setName: 'toolbox'.
+toolbox setDescription: 'Standard-issue toolbox. It''s unlocked'.
+toolbox setPickable: false.
+toolbox setLocked: false. "It's unlocked"
+toolbox setOpenMessage: 'Toolbox opened, you see a *hand_saw* and *electrical_tools*. The saw seems to be covered in rust, but it might be good for a single use.'.
+toolbox addTriggerAddedObject: hand_saw; addTriggerAddedObject: electrical_tools; addTriggerRemovedObject: toolbox.
+
 
 wooden_table_leg := GameObject new.
 wooden_table_leg setName: 'wooden_table_leg'.
@@ -411,15 +424,19 @@ code_1867 setPickable: true.
 
 "MICHAL ROOMS"
 workshop := Room new.
-workshop setDescription: 'A strange black mass near the *workshop_window* blocks the path south. It pulsates slightly, as if breathing.
-Underneath it you see one of your colleagues being slowly absorbed by what you assume to be some kind of alien intruder.
-A familiar smell of fuel fumes seems to be emanating from the creature.
-It might be flammable'.
+workshop setDescription: '"The workshop is where most engineering on the station happens.
+A door North leads to the engineering chiefs office, a South one to the escape pods'.
+workshop addGameObject: engineering_chief_office_door; addGameObject: table; addGameObject: small_fire; addGameObject: alien_mass;
+addGameObject:workshop_window; addGameObject: toolbox.
 
 engineering_chief_office := Room new.
-engineering_chief_office setName: 'engineering_chief_office'.
+engineering_chief_office setName: 'engineering_chief_office';
 setDescription: 'The office is in heavy disarray. A closed computer sits on the desk. 
 Next to one of the bookshelves lays a broken glass table. Something heavy must''ve fallen on it from one of the shelves.'.
+engineering_chief_office_door setConnetion: (Connection newDirection: 'N' to: engineering_chief_office).
+engineering_chief_office addConnection: 'S' to: workshop.
+engineering_chief_office addGameObject: metal_statue; addGameObject: closed_computer.
+
 
 escape_pods := Room new.
 escape_pods setName: 'escape_pods'.
@@ -427,8 +444,9 @@ escape_pods setDescription: 'This room is designed to hold the emergency evacuat
 All of them have either already been deployed, or are now covered in an alien, dark grey substance similar to the one that blocked the entrance to this room.
 All except for one. You have to move fast. The pods must first be lowered using the console.
 Then, once inside one of the pods, access to launch has to be granted by entering a code known to the managers of a given branch of the station.'.
-
-
+escape_pods addConnection: 'N' to: workshop.
+escape_pods_door setConnetion: (Connection newDirection: 'S' to: escape_pods).
+escape_pods addGameObject: broken_console.
 
 
 "workshop addConnection: 'W' to: engine_room."
@@ -441,5 +459,5 @@ Then, once inside one of the pods, access to launch has to be granted by enterin
 
 
 game := Game new.
-game setCurrentRoom: room2.
+game setCurrentRoom: workshop.
 game run.
