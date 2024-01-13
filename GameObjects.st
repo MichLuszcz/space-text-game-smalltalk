@@ -55,7 +55,7 @@ Object subclass: GameObject [
 
 
 GameObject subclass: InteractibleObject [
-    |triggerItemName triggerAddedObjects|
+    |triggerItemName triggerAddedObjects triggerRemovedObjects|
 
 
 
@@ -69,15 +69,24 @@ GameObject subclass: InteractibleObject [
         super initialize.
         triggerItemName := 'notValidItemName'.
         triggerAddedObjects := OrderedCollection new.
+        triggerRemovedObjects := OrderedCollection new.
         ^self
     ]
 
-    InteractibleObject >> addTriggerObject: aGameObject [
+    InteractibleObject >> addTriggerAddedObject: aGameObject [
         triggerAddedObjects add: aGameObject.
     ]
 
-    InteractibleObject >> removeTriggerObject: aGameObject [
+    InteractibleObject >> removeTriggerAddedObject: aGameObject [
         triggerAddedObjects remove: aGameObject ifAbsent: [].
+    ]
+
+    InteractibleObject >> addTriggerRemovedObject: aGameObject [
+        triggerRemovedObjects add: aGameObject.
+    ]
+
+    InteractibleObject >> removeTriggerRemovedObject: aGameObject [
+        triggerRemovedObjects remove: aGameObject ifAbsent: [].
     ]
 
     InteractibleObject >> setTriggerItemName: newName [
@@ -90,6 +99,9 @@ GameObject subclass: InteractibleObject [
         triggerItemName = aString ifTrue: [
             triggerAddedObjects do: [ :object |
                 room addGameObject: object.
+            ].
+            triggerRemovedObjects do: [ :object |
+                room removeGameObject: object
             ].
             Transcript show: 'You DO know how to use this.'; cr.
         ] ifFalse: [
