@@ -275,11 +275,11 @@ Object subclass: Game [
     "olek"
     "jedrek"
 "picakble objects"
-    "michal" object1
+    "michal" object1 hand_saw electrical_tools wooden_table_leg
     "olek"
     "jedrek"  
 "room objects" 
-    "michal" object2
+    "michal" object2 alien_mass toolbox small_fire workshop_window
     "olek"
     "jedrek"
 "doors" 
@@ -319,6 +319,52 @@ room1 setName: 'room1'.
 room2 addGameObject: object2.
 room2 addConnection: 'S' to: room1. 
 
+
+alien_mass := InteractibleObject new.
+alien_mass setName: 'alien_mass'.
+alien_mass setDescription: 'A strange black mass near the *workshop_window* blocks the path south. It pulsates slightly, as if breathing.
+Underneath it you see one of your colleagues being slowly absorbed by what you assume to be some kind of alien intruder.
+A familiar smell of fuel fumes seems to be emanating from the creature.
+It might be flammable'.
+"set usable thing"
+
+toolbox := UnlockableObject new.
+toolbox setName: 'toolbox'.
+toolbox setDescription: 'Standard-issue toolbox. It''s unlocked'.
+toolbox setPickable: false.
+toolbox setLocked: false. "It's unlocked"
+
+hand_saw := GameObject new.
+hand_saw setName: 'hand_saw'.
+hand_saw setDescription: 'An old hand saw'.
+hand_saw setPickable: true.
+
+electrical_tools := GameObject new.
+electrical_tools setName: 'electrical_tools'.
+electrical_tools setDescription: 'Various tools for electrical work such as wire cutters, soldering iron etc.'.
+electrical_tools setPickable: true.
+
+wooden_table_leg := GameObject new.
+wooden_table_leg setName: 'wooden_table_leg'.
+wooden_table_leg setDescription: 'Table leg, wooden'.
+wooden_table_leg setPickable: true.
+
+workshop_window := InteractibleObject new.
+workshop_window setName: 'workshop_window'.
+workshop_window setDescription: 'You look at the window and into space. You see pieces of debris coming from the ship as well as some strange black round objects you can''t identify.
+Can be broken with enough force. Last time this happened 2 workers got sucked out into space.'.
+workshop_window setPickable: false.
+
+small_fire := InteractibleObject new.
+small_fire setName: 'small_fire'.
+small_fire setDescription: 'A small electrical fire seems to have broken out in the corner of the room'.
+small_fire setPickable: false.
+
+table := InteractibleObject new.
+table setName: 'table'.
+table setDescription: 'An old wooden table. One of its legs seems to be barely holding on.
+You might be able to detach it if you had the proper tool.'.
+table setPickable: false.
 
 
 workshop := Room new.
