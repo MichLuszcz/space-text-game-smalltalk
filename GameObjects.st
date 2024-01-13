@@ -149,6 +149,9 @@ InteractibleObject subclass: UnlockableObject [
             triggerAddedObjects do: [ :object |
                 currentRoom addGameObject: object.
             ].
+            triggerRemovedObjects do: [ :object |
+                currentRoom removeGameObject: object
+            ].
             Transcript show: openMessage; nl.
         ] ifTrue: [
                 Transcript show: 'You have to unlock it first!'; nl.
