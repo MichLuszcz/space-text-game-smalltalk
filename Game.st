@@ -336,21 +336,21 @@ Object subclass: Game [
 "rooms"
     "michal" room1 room2 workshop engineering_chief_office escape_pods
     "olek"
-    "jedrek"
+    "jedrek" crew_bedroom crew_bedroom_vent main_corridor cantine 
 "picakble objects"
     "michal" object1 hand_saw electrical_tools wooden_table_leg metal_statue makeshift_torch code_1867
     "olek"
-    "jedrek"
-"room objects"
+    "jedrek"  hammer desk_key crew_access_card thick_blanket u_s_t cyber_key
+"room objects" 
     "michal" object2 alien_mass toolbox small_fire workshop_window table closed_computer opened_computer broken_console escape_pod_launch_console
     "olek"
-    "jedrek"
-"doors"
+    "jedrek" desk bed locker supply_cabinet space_latch flaming_e_box eng_chief
+"doors" 
     "michal" object3 engineering_chief_office_door escape_pods_door
     "olek"
-    "jedrek" |
+    "jedrek" security_door cantine_door south_corridor_exit_door
 
-
+|
 
 
 FileStream fileIn: 'GameObjects.st'.
@@ -368,7 +368,7 @@ object2 := InteractibleObject new.
 object2 setName: 'obj2'; setDescription: 'desc2'.
 object2 setTriggerItemName: 'obj1'; addTriggerAddedObject: object3.
 object3 := DoorObject new.
-object3 setTriggerItemName: 'obj1'; setConnetion: (Connection newDirection: 'N' to: room2).
+object3 setTriggerItemName: 'obj1'; setConnection: (Connection newDirection: 'N' to: room2).
 object3 setName: 'door'; setLocked: false.
 
 object1 getName.
@@ -382,6 +382,201 @@ room1 setName: 'room1'.
 room2 addGameObject: object2.
 room2 addConnection: 'S' to: room1.
 
+
+" JEDREK DORRS"
+security_door := DoorObject new.
+security_door setTriggerItemName: 'crew_access_card';
+setName: 'security_door';
+setDescription: '
+The door leading out of your room to the main corridor remains locked. You need your own *crew_access_card* to unlock it.
+'.
+
+cantine_door := DoorObject new.
+cantine_door setName: 'cantine_door';
+setDescription: '
+This door leads to the cantine. It is not locked with any lock.
+'.
+cantine_door setLocked: false.
+
+south_corridor_exit_door := DoorObject new.
+south_corridor_exit_door setName: 'south_corridor_exit_door';
+setDescription: '
+This exit leads out of the living space to the other sections of the ship.
+It should not be locked.
+'.
+south_corridor_exit_door setLocked: false.
+" JEDREK ITEMS "
+
+" crew bedroom vent"
+
+desk_key := GameObject new.
+desk_key setName: 'desk_key'.
+desk_key setDescription: '
+A key to the desk in your room.
+'.
+desk_key setPickable: true.
+
+" crew bedroom "
+
+hammer := GameObject new.
+hammer setName: 'hammer'.
+hammer setDescription: '
+A hammer. It''s heavy and could be used to break things.
+'.
+hammer setPickable: true.
+
+crew_access_card := GameObject new.
+crew_access_card setName: 'crew_access_card'.
+crew_access_card setDescription: '
+A card that allows you to access the crew quarters.
+'.
+crew_access_card setPickable: true.
+
+thick_blanket := GameObject new.
+thick_blanket setName: 'thick_blanket'.
+thick_blanket setDescription: '
+A thick blanket.
+'.
+thick_blanket setPickable: true.
+
+engineering_chief_access_card := GameObject new.
+engineering_chief_access_card setName: 'engineering_chief_access_card'.
+engineering_chief_access_card setDescription: '
+A card that allows you to access the engineering chief''s office.
+'.
+engineering_chief_access_card setPickable: true.
+
+
+"------------"
+
+" main corridor "
+
+" u_s_t := GameObject new.
+u_s_t setName: 'u_s_t'.
+u_s_t setDescription: 'An universal speech translator'.
+u_s_t setPickable: true. "
+
+" ------------"
+" cantine"
+
+cyber_key := GameObject new.
+cyber_key setName: 'cyber_key'.
+cyber_key setDescription: '
+A cybernetic key
+'.
+cyber_key setPickable: true.
+
+"------------"
+
+" JEDREKS ROOM ITEMS "
+
+" crew bedroom "
+
+desk := UnlockableObject new.
+desk setName: 'desk'.
+desk setDescription: '
+The desk is locked. There should be a key on it, but maybe it flew somewhere during the crash.
+'.
+desk setLocked: true.
+desk setPickable: false.
+desk setTriggerItemName: 'desk_key';
+addTriggerAddedObject: crew_access_card; addTriggerRemovedObject: desk.
+desk setTriggerMessage: '
+You unlock the desk and find a *crew_access_card* inside. You take it.
+'.
+
+
+"bed := InteractibleObject new.
+bed setName: 'bed'.
+bed setDescription: 'There is nothing special on this bed, aside from a Thick_Blanket. I wonder if it could be useful later.'.
+bed addTriggerAddedObject: thick_blanket; addTriggerRemovedObject: bed.
+"
+
+locker := UnlockableObject new.
+locker setName: 'locker'.
+locker setDescription: '
+A locker. It is not s locked. It might contain something useful.
+'.
+locker setPickable: false.
+locker setLocked: false. "It's unlocked"
+locker setOpenMessage: '
+Your locker in your room, its unlocked so you might find something useful.
+'.
+locker addTriggerAddedObject: hammer; addTriggerRemovedObject: locker.
+
+"-------"
+
+" main corridor "
+flaming_e_box := InteractibleObject new.
+flaming_e_box setName: 'flaming_e_box'.
+flaming_e_box setDescription: '
+The electric box is on fire. You need to put it out somehow.
+'.
+flaming_e_box setTriggerItemName: 'thick_blanket'.
+flaming_e_box setTriggerMessage: '
+You throw the blanket on the fire, putting it out. The smoke clears out and the room becomes visible again
+'.
+flaming_e_box addTriggerAddedObject: cantine_door; addTriggerAddedObject: south_corridor_exit_door; addTriggerRemovedObject: flaming_e_box.
+
+
+supply_cabinet := UnlockableObject new.
+supply_cabinet setName: 'supply_cabinet'.
+supply_cabinet setDescription: '
+The supply cabinet is wrapped in a chain and locked with a padlock. There is now way there is a key here.
+'.
+supply_cabinet setTriggerItemName: 'hammer';
+setTriggerMessage: '
+You break the padlock with the hammer, and the items inside fall out on the floor.
+';
+addTriggerAddedObject: engineering_chief_access_card; addTriggerRemovedObject: supply_cabinet.
+
+
+
+" JEDREK ROOMS "
+
+crew_bedroom := Room new.
+crew_bedroom setName: 'crew_bedroom'.
+crew_bedroom setDescription: '
+You are in the crew bedroom, there is a security door on the south, and a vent entrance on the east.
+'.
+crew_bedroom addGameObject: security_door; addGameObject: desk; addGameObject: thick_blanket; addGameObject: locker.
+
+
+crew_bedroom_vent := Room new.
+crew_bedroom_vent setName: 'crew_bedroom_vent'.
+crew_bedroom_vent setDescription: '
+You crawl into a rather spatious crew bedroom vent. There it is! This is where you desk_key went!
+Good thing it didnt fall deeper or you would be stuck in here for ever.
+'.
+crew_bedroom_vent addGameObject: desk_key.
+
+main_corridor := Room new.
+main_corridor setName: 'main_corridor'.
+main_corridor setDescription: '
+You decide its finally time to leave your quarters. Staying here definetely wont help you find out whats going on.
+You enter the main corridor, but you can barely see anything.
+You can see the reason now why the alarms are going off.
+A fire is raging only a few meters in front of you. Probably just an overcharged e-box - your engineers instinct tells you.
+However you still cant pass through it. You need to find a way to put it out.
+Behind your back, at the west end, there is a supply cabinet, but the east end of the corridor lays behind the fire.
+';
+addGameObject: supply_cabinet; addGameObject: flaming_e_box.
+
+
+" south_corridor_exit_door setConnection: (Connection newDirection: 'S' to: south_corridor). "
+
+cantine := Room new.
+cantine setDescription: '
+You enter the cantine. It is a rather small room, with a few tables and chairs
+'.
+cantine addGameObject: cyber_key.
+
+"CONNECTIONS"
+crew_bedroom addConnection: 'E' to: crew_bedroom_vent.
+crew_bedroom_vent addConnection: 'W' to: crew_bedroom.
+security_door setConnection: (Connection newDirection: 'S' to: main_corridor).
+cantine_door setConnection: (Connection newDirection: 'E' to: cantine).
+"---------------"
 
 engineering_chief_office_door := DoorObject new.
 engineering_chief_office_door setTriggerItemName: 'engineering_chief_access_card';
@@ -412,6 +607,7 @@ electrical_tools := GameObject new.
 electrical_tools setName: 'electrical_tools'.
 electrical_tools setDescription: 'Various tools for electrical work such as wire cutters, soldering iron etc.'.
 electrical_tools setPickable: true.
+
 
 toolbox := UnlockableObject new.
 toolbox setName: 'toolbox'.
@@ -543,7 +739,7 @@ engineering_chief_office := Room new.
 engineering_chief_office setName: 'engineering_chief_office';
 setDescription: 'The office is in heavy disarray. A closed computer sits on the desk.
 Next to one of the bookshelves lays a broken glass table. Something heavy must''ve fallen on it from one of the shelves.'.
-engineering_chief_office_door setConnetion: (Connection newDirection: 'N' to: engineering_chief_office).
+engineering_chief_office_door setConnection: (Connection newDirection: 'N' to: engineering_chief_office).
 engineering_chief_office addConnection: 'S' to: workshop.
 engineering_chief_office addGameObject: metal_statue; addGameObject: closed_computer.
 
@@ -555,7 +751,7 @@ All of them have either already been deployed, or are now covered in an alien, d
 All except for one. You have to move fast. The pods must first be lowered using the console.
 Then, once inside one of the pods, access to launch has to be granted by entering a code known to the managers of a given branch of the station.'.
 escape_pods addConnection: 'N' to: workshop.
-escape_pods_door setConnetion: (Connection newDirection: 'S' to: escape_pods).
+escape_pods_door setConnection: (Connection newDirection: 'S' to: escape_pods).
 escape_pods addGameObject: broken_console.
 
 
@@ -681,7 +877,7 @@ startCorridor addGameObject: cyberKey.
 
 
 game := Game new.
-game setCurrentRoom: startCorridor.
+game setCurrentRoom: crew_bedroom.
 game run.
 
 " pick cyberKey

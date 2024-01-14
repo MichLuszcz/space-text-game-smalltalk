@@ -192,7 +192,7 @@ UnlockableObject subclass: DoorObject [
         ^self
     ]
 
-    DoorObject >> setConnetion: newConnection [
+    DoorObject >> setConnection: newConnection [
         connection := newConnection. " class = Connection"
     ]
 
