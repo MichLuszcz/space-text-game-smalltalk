@@ -302,6 +302,15 @@ Object subclass: Game [
                 newRoom := currentRoom getRoomOnThe: (words last).
                 newRoom ifNotNil: [
                     currentRoom:= newRoom.
+
+                    (currentRoom getRoomName) = 'The Void' ifTrue: [
+                        (self findObjectInInventory: 'spaceSuit') = nil ifTrue: [
+                            Transcript show: 'You entered The Void without a spacesuit and died!'; cr.
+                            isGameOver := true.
+                            ^''
+                        ]
+                    ].
+
                     Transcript show: 'Moved to ', (currentRoom getRoomName); cr.
                     ] ifNil: [
                     Transcript show: 'You can''t go that way.'; nl.
@@ -557,6 +566,10 @@ escape_pods addGameObject: broken_console.
 
 
 " OLEK "
+startCorridor := Room new.
+startCorridor setName: 'startCorridor'.
+startCorridor setDescription: 'You are in the corridor. There is an engine room on the South and an exit to The Void on west.'.
+
 engineRoomDashboard := InteractibleObject new.
 engineRoomDashboard setName: 'engineRoomDashboard'.
 engineRoomDashboard setDescription: 'A dashboard with a lot of buttons and switches. It seems to be used to control the engines.'.
@@ -598,8 +611,6 @@ engineRoom setDescription: 'The engine room is where the station''s engines are 
 serviceRoom := Room new.
 serviceRoom setName: 'serviceRoom'.
 serviceRoom setDescription: 'You are in the service room, It was used by ships technicians.'.
-serviceRoom addConnection: 'N' to: engineVentRoomExit.
-serviceRoom addGameObject: serviceRoomLocker; addGameObject: serviceRoomLockedCrate.
 
 engineVentRoom := Room new.
 engineVentRoom setName: 'engineVentRoom'.
@@ -620,10 +631,12 @@ engineVentRoom addConnection: 'S' to: engineVentRoomExit.
 engineVentRoomExit addConnection: 'N' to: engineVentRoom.
 engineVentRoomExit addConnection: 'S' to: serviceRoom.
 
+serviceRoom addConnection: 'N' to: engineVentRoomExit.
+serviceRoom addGameObject: serviceRoomLocker; addGameObject: serviceRoomLockedCrate.
+
 engineVentRoomDeadEnd addConnection: 'S' to: engineVentRoom.
 
-engineRoom addConnection: 'N' to: workshop.
-engineRoom addGameObject: cyberKey.
+engineRoom addConnection: 'N' to: startCorridor.
 engineRoom addGameObject: engineRoomDashboard.
 
 engineRoomDashboard setTriggerItemName: 'cyberKey'.
@@ -632,7 +645,38 @@ engineRoomDashboard setUseCallback: [
     engineRoom addConnection: 'W' to: engineVentRoom.
     engineRoom setDescription: 'Bridge felt down, you must find some other way to cross the gap. On Its way down, It opened and entrance to the nearby vent, which looks like it could be crawled into.'.
     engineRoom removeGameObject: engineRoomDashboard.
+
+    bridgeGap := InteractibleObject new.
+    bridgeGap setName: 'bridgeGap'.
+    bridgeGap setDescription: 'A big gap, left from falling bridge.'.
+    bridgeGap setPickable: false.
+    bridgeGap setTriggerItemName: 'grappler'.
+    bridgeGap setUseCallback: [
+        Transcript show: 'You use the grappler to cross the gap.'; cr.
+        engineRoom addConnection: 'S' to: workshop.
+        engineRoom setDescription: 'Grappler allows you to easily cross the gap.'.
+        engineRoom removeGameObject: bridgeGap.
+    ].
+    engineRoom addGameObject: bridgeGap.
 ].
+
+grappler := GameObject new.
+grappler setName: 'grappler'.
+grappler setDescription: 'A grappler, used by technicians to manouver outside of the ship.'.
+grappler setPickable: true.
+
+
+voidRoom := Room new.
+voidRoom setName: 'The Void'.
+voidRoom setDescription: 'From the outside you can really see the scale of the destruction, something must have hit the ship really hard. Look around maybe technicians have left something usefull in here.'.
+
+voidRoom addGameObject: grappler.
+
+voidRoom addConnection: 'E' to: startCorridor.
+startCorridor addConnection: 'W' to: voidRoom.
+startCorridor addConnection: 'S' to: engineRoom.
+startCorridor addGameObject: cyberKey.
+
 
 
 
@@ -640,10 +684,11 @@ engineRoomDashboard setUseCallback: [
 
 
 game := Game new.
-game setCurrentRoom: engineRoom.
+game setCurrentRoom: startCorridor.
 game run.
 
 " pick cyberKey
+move S
 use cyberKey on engineRoomDashboard
 move W
 move S
@@ -652,4 +697,14 @@ type code 9922
 pick spaceSuitHelmet
 pick spaceSuitJacket
 pick spaceSuitTrousers
-craft spaceSuitHelmet spaceSuitJacket spaceSuitTrousers "
+craft spaceSuitHelmet spaceSuitJacket spaceSuitTrousers
+pick spaceSuit
+move N
+move N
+move E
+move N
+move W
+pick grappler
+move E
+move S
+use grappler on bridgeGap "
