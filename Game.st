@@ -25,33 +25,29 @@ Object subclass: Game [
     | isGameOver inventory currentRoom|
 
     introductionText := #(
-        'A long time ago, in a galaxy far, far away...'
-        ''
-        'It is a period of civil war. Rebel'
-        'spaceships, striking from a hidden'
-        'base, have won their first victory'
-        'against the evil Galactic Empire.'
-        ''
-        'During the battle, Rebel spies managed'
-        'to steal secret plans to the Empire''s'
-        'ultimate weapon, the Death Star, an'
-        'armored space station with enough'
-        'power to destroy an entire planet.'
-        ''
-        'Pursued by the Empire''s sinister agents,'
-        'Princess Leia races home aboard her'
-        'starship, custodian of the stolen plans'
-        'that can save her people and restore'
-        'freedom to the galaxy....'
+        'A loud crashing sound wakes you up in you bed inside the engineering crew bedroom. 
+You look around and see that the room is in a mess. 
+A vent in the east corner of the room swings wide open. 
+Blaring alarms can be heard from the main corridor on the south side. 
+You see a locker, a desk and a bed. You need to act, fast.'
         ''
     ).
 
     instructionsText := #(
         'Available commands are:'
         ''
-        'instructions  -- to see these instructions.'
-        'quit          -- to end the game and quit.'
-        ''
+        'instructions           -- see these instructions.'
+        'move W/E/S/N           -- move west/est/south/north'
+        'pick {item name}       -- pick up an item'
+        'inspect {item name}    -- inspect an item'
+        'open {item name}       -- open something'
+        'use {your item} on {item in the room} -- use an item from your inventory on something you see'
+        'look                   -- look around the room'
+        'check inventory        -- list out your inventory'
+        'check exits            -- see available exits'
+        'craft {item1} {item2} {item3}  -- combine items into a new one'
+        'quit                   -- to end the game and quit.'
+
     ).
 
     Game class >> new [
@@ -900,4 +896,4 @@ move W
 pick grappler
 move E
 move S
-use grappler on bridgeGap "
+use grappler on bridgeGap"
