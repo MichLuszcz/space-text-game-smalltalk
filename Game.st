@@ -205,6 +205,7 @@ You see a locker, a desk and a bed. You need to act, fast.'
             words first = 'look' ifTrue: [
                 Transcript show: 'Room: ', (currentRoom getRoomName); cr.
                 Transcript show: (currentRoom getDescription); cr; cr.
+                Transcript show: 'In the room you see the following items: '; nl.
                 "List objects in room"
                 currentRoom printObjects.
                 isUnknown := false
@@ -243,7 +244,7 @@ You see a locker, a desk and a bed. You need to act, fast.'
                 isUnknown := false.
             ].
 
-            "craft spacesuit TODO"
+            "craft spacesuit"
             words first = 'craft' ifTrue: [
                 |part1 part2 part3 spaceSuit|
                 part1 := words at: 2 ifAbsent: [nil].
@@ -886,25 +887,3 @@ crew_bedroom_vent addConnection: 'N' to: voidRoom.
 game := Game new.
 game setCurrentRoom: crew_bedroom.
 game run.
-
-" pick cyber_key
-move S
-use cyber_key on engineRoomDashboard
-move W
-move S
-move S
-type code 9922
-pick spaceSuitHelmet
-pick spaceSuitJacket
-pick spaceSuitTrousers
-craft spaceSuitHelmet spaceSuitJacket spaceSuitTrousers
-pick spaceSuit
-move N
-move N
-move E
-move N
-move W
-pick grappler
-move E
-move S
-use grappler on bridgeGap"
