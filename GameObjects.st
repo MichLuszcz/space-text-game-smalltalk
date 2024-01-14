@@ -108,8 +108,10 @@ GameObject subclass: InteractibleObject [
                 room removeGameObject: object
             ].
             Transcript show: triggerMessage; cr.
+            ^true.
         ] ifFalse: [
             Transcript show: 'You do not know how to use this in this manner.'; cr.
+            ^false.
         ].
     ]
 ]
@@ -136,11 +138,13 @@ InteractibleObject subclass: UnlockableObject [
     ]
 
     UnlockableObject >> use: aString inRoom: room [
-        triggerItemName = aString ifTrue: [
+        ^triggerItemName = aString ifTrue: [
             locked := false.
             Transcript show: triggerMessage; cr.
+            ^true.
         ] ifFalse: [
             Transcript show: 'You do not know how to use this in this manner.'; cr.
+            ^false.            
         ].
     ]
 

@@ -71,9 +71,6 @@ Object subclass: Game [
         isGameOver := false.
         inventory := OrderedCollection new.
         currentRoom := Room new.
-        currentRoom addGameObject: (GameObject new).
-        currentRoom addGameObject: (InteractibleObject new).
-
     ]
 
     "Print strings from array in separate lines."
@@ -192,7 +189,9 @@ Object subclass: Game [
                     targetItem
                     ifNotNil: [
                         "Transcript show: 'using ', foundObject getName, ' on ', targetItem getName; cr."
-                        targetItem use: (foundObject getName) inRoom: currentRoom.
+                        (targetItem use: (foundObject getName) inRoom: currentRoom) ifTrue: [
+                            inventory remove: foundObject ifAbsent: [].
+                        ].
                     ]
                     ifNil: [
                         Transcript show: 'Target item not found in this room'; nl.
