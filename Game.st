@@ -207,7 +207,8 @@ Object subclass: Game [
 
             "look"
             words first = 'look' ifTrue: [
-                Transcript show: (currentRoom getDescription); cr.
+                Transcript show: 'Room: ', (currentRoom getRoomName); cr.
+                Transcript show: (currentRoom getDescription); cr; cr.
                 "List objects in room"
                 currentRoom printObjects.
                 isUnknown := false
