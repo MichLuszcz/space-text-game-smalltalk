@@ -201,7 +201,6 @@ Object subclass: Game [
                 ifNil: [
                     Transcript show: 'You dont have that object.'; cr.
                 ].
-                Transcript show: 'sysy knyszy'; cr.
                 isUnknown := false
             ].
 
@@ -255,7 +254,6 @@ Object subclass: Game [
                 part3 := words at: 4 ifAbsent: [nil].
 
                 (part1 = 'spaceSuitHelmet' & part2 = 'spaceSuitJacket' & part3 = 'spaceSuitTrousers') ifTrue: [
-                    Transcript show: 'dddddddddddddddd!'; cr.
                     ((self findObjectInInventory: 'spaceSuitHelmet') = nil) | ((self findObjectInInventory: 'spaceSuitHelmet') = nil) | ((self findObjectInInventory: 'spaceSuitHelmet') = nil) ifTrue: [
                         Transcript show: 'You don''t have all the parts.'; cr.
                     ] ifFalse: [
@@ -315,7 +313,6 @@ Object subclass: Game [
                     Transcript show: 'You can''t go that way.'; nl.
                     ].
 
-                Transcript show: 'sysy knyszy'; cr.
                 isUnknown := false
             ].
 
@@ -566,7 +563,7 @@ escape_pods addGameObject: broken_console.
 
 " OLEK "
 startCorridor := Room new.
-startCorridor setName: 'startCorridor'.
+startCorridor setName: 'Main Corridor'.
 startCorridor setDescription: 'You are in the corridor. There is an engine room on the South and an exit to The Void on west.'.
 
 engineRoomDashboard := InteractibleObject new.
@@ -604,23 +601,23 @@ serviceRoomLockedCrate setUseCallback: [
 ].
 
 engineRoom := Room new.
-engineRoom setName: 'engineRoom'.
+engineRoom setName: 'Engine Room'.
 engineRoom setDescription: 'The engine room is where the station''s engines are located. To access rest of the ship on the south, you must somehow lower the bridge to cross the big gap.'.
 
 serviceRoom := Room new.
-serviceRoom setName: 'serviceRoom'.
+serviceRoom setName: 'Service Room'.
 serviceRoom setDescription: 'You are in the service room, It was used by ships technicians.'.
 
 engineVentRoom := Room new.
-engineVentRoom setName: 'engineVentRoom'.
+engineVentRoom setName: 'Engine Vent Entrance'.
 engineVentRoom setDescription: 'It''s freezing cold in here. You can choose to explore further south or north.'.
 
 engineVentRoomDeadEnd := Room new.
-engineVentRoomDeadEnd setName: 'engineVentRoomDeadEnd'.
+engineVentRoomDeadEnd setName: 'Engine Vent Noth Path'.
 engineVentRoomDeadEnd setDescription: 'Vent gets too narrow in here. Maybe try another way.'.
 
 engineVentRoomExit := Room new.
-engineVentRoomExit setName: 'engineVentRoomExit'.
+engineVentRoomExit setName: 'Engine Vent South Path'.
 engineVentRoomExit setDescription: 'After long crawl there seems to be an exit.'.
 
 engineVentRoom addConnection: 'E' to: engineRoom.
