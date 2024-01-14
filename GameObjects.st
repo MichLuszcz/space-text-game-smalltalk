@@ -55,7 +55,7 @@ Object subclass: GameObject [
 
 
 GameObject subclass: InteractibleObject [
-    |triggerItemName triggerAddedObjects triggerRemovedObjects triggerMessage|
+    |triggerItemName triggerAddedObjects triggerRemovedObjects triggerMessage useCallback|
 
 
 
@@ -98,6 +98,10 @@ GameObject subclass: InteractibleObject [
         triggerMessage := newMessage.
     ]
 
+    InteractibleObject >> setUseCallback: aBlock [
+        useCallback := aBlock.
+    ]
+
     "Adds items to current room after a correct thing is used on it"
     InteractibleObject >> use: aString inRoom: room [
         triggerItemName = aString ifTrue: [
@@ -108,6 +112,10 @@ GameObject subclass: InteractibleObject [
                 room removeGameObject: object
             ].
             Transcript show: triggerMessage; cr.
+
+            useCallback ifNotNil: [
+                useCallback value.
+            ].
         ] ifFalse: [
             Transcript show: 'You do not know how to use this in this manner.'; cr.
         ].

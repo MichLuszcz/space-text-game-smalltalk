@@ -53,7 +53,7 @@ Object subclass: Game [
         'quit          -- to end the game and quit.'
         ''
     ).
- 
+
     Game class >> new [
         | g |
         g := super new.
@@ -127,7 +127,7 @@ Object subclass: Game [
             ].
             words := cmd substrings. "array of words"
 
-        
+
             "pick"
             words first = 'pick' ifTrue: [
                 foundObject := (currentRoom findObjectByName: (words last)).
@@ -141,7 +141,7 @@ Object subclass: Game [
                         ] ifFalse: [
                             Transcript show: 'You can''t pick this up'; nl.
                         ].
-                    
+
                     ]
                     ifNil: [
                     Transcript show: 'There is no such object in this room.'; cr.
@@ -169,7 +169,7 @@ Object subclass: Game [
             "has to add items to currentRoom, this happens in the Unlockable object"
             words first = 'open' ifTrue: [
                 foundObject := currentRoom findObjectByName: (words last).
-                foundObject 
+                foundObject
                 ifNotNil: [
                     foundObject open: currentRoom.
                 ]
@@ -187,7 +187,7 @@ Object subclass: Game [
 
                 foundObject := self findObjectInInventory: (words at: 2).
                 targetItem := currentRoom findObjectByName: (words last).
-                foundObject 
+                foundObject
                 ifNotNil: [
                     targetItem
                     ifNotNil: [
@@ -234,10 +234,10 @@ Object subclass: Game [
                 words last = 'exits' ifTrue: [
                     currentRoom listConnections.
                     isUnknown := false
-                ].                
+                ].
             ].
 
-        
+
             "move"
             words first = 'move' & words size = 2 ifTrue: [
                 |newRoom|
@@ -249,7 +249,7 @@ Object subclass: Game [
                     ] ifNil: [
                     Transcript show: 'You can''t go that way.'; nl.
                     ].
-                
+
                 Transcript show: 'sysy knyszy'; cr.
                 isUnknown := false
             ].
@@ -259,7 +259,7 @@ Object subclass: Game [
                 Transcript show: 'connect cables'; cr.
                 isUnknown := false
             ].
-                
+
             isUnknown ifTrue: [
                 self printLines: #('Unknown command.' '')
             ]
@@ -268,7 +268,7 @@ Object subclass: Game [
 ]
 
 
-"game" |game 
+"game" |game
 
 "rooms"
     "michal" room1 room2 workshop engineering_chief_office escape_pods
@@ -277,12 +277,12 @@ Object subclass: Game [
 "picakble objects"
     "michal" object1 hand_saw electrical_tools wooden_table_leg metal_statue makeshift_torch code_1867
     "olek"
-    "jedrek"  
-"room objects" 
+    "jedrek"
+"room objects"
     "michal" object2 alien_mass toolbox small_fire workshop_window table closed_computer opened_computer broken_console escape_pod_launch_console
     "olek"
     "jedrek"
-"doors" 
+"doors"
     "michal" object3 engineering_chief_office_door escape_pods_door
     "olek"
     "jedrek" |
@@ -317,7 +317,7 @@ room1 addGameObject: object1; addGameObject: object3.
 room1 setName: 'room1'.
 
 room2 addGameObject: object2.
-room2 addConnection: 'S' to: room1. 
+room2 addConnection: 'S' to: room1.
 
 
 engineering_chief_office_door := DoorObject new.
@@ -442,11 +442,11 @@ escape_pod_launch_console setName: 'escape_pod_launch_console'.
 escape_pod_launch_console setDescription: 'Inside the pod is a big screen with a prompt that reads:
 PLEASE ENTER LAUNCH AUTHORIZATION CODE TO INITIATE LAUNCH SEQUENCE'.
 escape_pod_launch_console setTriggerItemName: 'code_1867';
-setTriggerMessage: 'You punch in the code. The door to the pod closes behind you and you hear a robotic voice come from the console: 
-Voice: Launch sequence initiated. Please take a seat and fasten your seatbelts. 
+setTriggerMessage: 'You punch in the code. The door to the pod closes behind you and you hear a robotic voice come from the console:
+Voice: Launch sequence initiated. Please take a seat and fasten your seatbelts.
 
 You sit down and hope for the best. After a 20 second countdown the pod begins to shake and propels itself out of the station.
-You made it. As you''re leaving the station you see the ship is covered in a moving blanket of black material. 
+You made it. As you''re leaving the station you see the ship is covered in a moving blanket of black material.
 You live to tell the tale. You try contacting the closest colony and explain the situation. You get permission for emergency landing.
 Congratulations! You managed to escape the station!
 
@@ -457,10 +457,10 @@ broken_console setName: 'broken_console'.
 broken_console setDescription: 'A console used for lowering the escape pods, broken. Looks like it short-circuited.
 You spot some black matter between the wires. This must be what caused the break.
 Needs specialized tools to be fixed.'.
-broken_console setTriggerItemName: 'electrical_tools'; 
-setTriggerMessage: 'You manage to fix the console and use it to lower down the remaining escape pod. 
+broken_console setTriggerItemName: 'electrical_tools';
+setTriggerMessage: 'You manage to fix the console and use it to lower down the remaining escape pod.
 You can now access the *escape_pod_launch_console* inside the pod and get out of here.';
-addTriggerAddedObject: escape_pod_launch_console; 
+addTriggerAddedObject: escape_pod_launch_console;
 addTriggerRemovedObject: broken_console.
 
 
@@ -478,7 +478,7 @@ addGameObject:workshop_window; addGameObject: toolbox.
 
 engineering_chief_office := Room new.
 engineering_chief_office setName: 'engineering_chief_office';
-setDescription: 'The office is in heavy disarray. A closed computer sits on the desk. 
+setDescription: 'The office is in heavy disarray. A closed computer sits on the desk.
 Next to one of the bookshelves lays a broken glass table. Something heavy must''ve fallen on it from one of the shelves.'.
 engineering_chief_office_door setConnetion: (Connection newDirection: 'N' to: engineering_chief_office).
 engineering_chief_office addConnection: 'S' to: workshop.
@@ -499,6 +499,72 @@ escape_pods addGameObject: broken_console.
 "workshop addConnection: 'W' to: engine_room."
 
 
+" OLEK "
+engineRoomDashboard := InteractibleObject new.
+engineRoomDashboard setName: 'engineRoomDashboard'.
+engineRoomDashboard setDescription: 'A dashboard with a lot of buttons and switches. It seems to be used to control the engines.'.
+
+cyberKey := GameObject new.
+cyberKey setName: 'cyberKey'.
+cyberKey setDescription: 'A keycard with a picture of a cybernetic eye on it'.
+cyberKey setPickable: true.
+
+spaceSuitSchema := GameObject new.
+spaceSuitSchema setName: 'spaceSuitSchema'.
+spaceSuitSchema setDescription: 'To assemble the working spacesuit, you will need: spaceSuitHelmet, speceSuitJacket, spaceSuitTrousers'.
+
+uvFlashlight := GameObject new.
+uvFlashlight setName: 'uvFlashlight'.
+uvFlashlight setDescription: 'A flashlight that emits UV light.'.
+uvFlashlight setPickable: true.
+
+serviceRoomLocker := UnlockableObject new.
+serviceRoomLocker setName: 'serviceRoomLocker'.
+serviceRoomLocker setDescription: 'Locker without a padlock, It can easily be opened.'.
+serviceRoomLocker addTriggerAddedObject: uvFlashlight.
+serviceRoomLocker addTriggerAddedObject: spaceSuitSchema.
+serviceRoomLocker setLocked: false.
+
+engineRoom := Room new.
+engineRoom setName: 'engineRoom'.
+engineRoom setDescription: 'The engine room is where the station''s engines are located. To access rest of the ship on the south, you must somehow lower the bridge to cross the big gap.'.
+
+serviceRoom := Room new.
+serviceRoom setName: 'serviceRoom'.
+serviceRoom setDescription: 'You are in the service room, It was used by ships technicians.'.
+
+engineVentRoom := Room new.
+engineVentRoom setName: 'engineVentRoom'.
+engineVentRoom setDescription: 'It''s freezing cold in here. You can choose to explore further south or north.'.
+
+engineVentRoomDeadEnd := Room new.
+engineVentRoomDeadEnd setName: 'engineVentRoomDeadEnd'.
+engineVentRoomDeadEnd setDescription: 'Vent gets too narrow in here. Maybe try another way.'.
+
+engineVentRoomExit := Room new.
+engineVentRoomExit setName: 'engineVentRoomExit'.
+engineVentRoomExit setDescription: 'After long crawl there seems to be an exit.'.
+
+engineVentRoom addConnection: 'E' to: engineRoom.
+engineVentRoom addConnection: 'N' to: engineVentRoomDeadEnd.
+engineVentRoom addConnection: 'S' to: engineVentRoomExit.
+
+engineVentRoomExit addConnection: 'N' to: engineVentRoom.
+
+engineVentRoomDeadEnd addConnection: 'S' to: engineVentRoom.
+
+engineRoom addConnection: 'N' to: workshop.
+engineRoom addGameObject: cyberKey.
+engineRoom addGameObject: engineRoomDashboard.
+
+engineRoomDashboard setTriggerItemName: 'cyberKey'.
+engineRoomDashboard setUseCallback: [
+    Transcript show: 'The key seemes to fit perfectly, you hear a loud noise, and the bridge starts lowering down...'; cr; show: 'It is making a loud noise, engine room must have really taken a lot of damage.'; cr; show: 'SNAP! The bridge broke down, and fell to the bottom. On its way it made a hole in nearby vent'; cr.
+    engineRoom addConnection: 'W' to: engineVentRoom.
+    engineRoom setDescription: 'Bridge felt down, you must find some other way to cross the gap. On Its way down, It opened and entrance to the nearby vent, which looks like it could be crawled into.'.
+    engineRoom removeGameObject: engineRoomDashboard.
+].
+
 
 
 
@@ -506,5 +572,5 @@ escape_pods addGameObject: broken_console.
 
 
 game := Game new.
-game setCurrentRoom: workshop.
+game setCurrentRoom: engineRoom.
 game run.
