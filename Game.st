@@ -325,7 +325,6 @@ engineering_chief_office_door setTriggerItemName: 'engineering_chief_access_card
 setName: 'engineering_chief_office_door';
 setDescription: 'The door to the chief''s office, usually locked by an access card'.
 
-
 escape_pods_door := DoorObject new.
 escape_pods_door setLocked: false;
 setName: 'escape_pods_door';
@@ -471,6 +470,7 @@ addTriggerRemovedObject: broken_console.
 
 "MICHAL ROOMS"
 workshop := Room new.
+workshop setName: 'workshop'.
 workshop setDescription: 'The workshop is where most engineering on the station happens.
 A door North leads to the engineering chiefs office, a South one to the escape pods'.
 workshop addGameObject: engineering_chief_office_door; addGameObject: table; addGameObject: small_fire; addGameObject: alien_mass;
