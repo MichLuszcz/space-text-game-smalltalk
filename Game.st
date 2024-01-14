@@ -322,11 +322,14 @@ room2 addConnection: 'S' to: room1.
 
 engineering_chief_office_door := DoorObject new.
 engineering_chief_office_door setTriggerItemName: 'engineering_chief_access_card';
-setName: 'engineering_chief_office_door'.
+setName: 'engineering_chief_office_door';
+setDescription: 'The door to the chief''s office, usually locked by an access card'.
+
 
 escape_pods_door := DoorObject new.
 escape_pods_door setLocked: false;
-setName: 'escape_pods_door'.
+setName: 'escape_pods_door';
+setDescription: 'Door leading to the room with emergency escape pods for the engineering crew.'.
 
 alien_mass := InteractibleObject new.
 alien_mass setName: 'alien_mass'.
@@ -370,6 +373,10 @@ workshop_window setPickable: false.
 workshop_window setTriggerItemName: 'metal_statue'.
 workshop_window addTriggerAddedObject: escape_pods_door.
 workshop_window addTriggerRemovedObject: workshop_window; addTriggerRemovedObject: alien_mass.
+workshop_window setTriggerMessage: 'You hurl the statue at the window, breaking it. The air begins to get sucked out the room at an incredible speed.
+You grab onto the nearest pipe. All loose objects in the room fly out of the window
+and the alien mass gets sucked out with them, leaving the path south clear.
+the emergency force field kicks in and seals the hole before you lose consciousness'.
 
 makeshift_torch := GameObject new.
 makeshift_torch setName: 'makeshift_torch'.
@@ -452,6 +459,8 @@ broken_console setDescription: 'A console used for lowering the escape pods, bro
 You spot some black matter between the wires. This must be what caused the break.
 Needs specialized tools to be fixed.'.
 broken_console setTriggerItemName: 'electrical_tools'; 
+setTriggerMessage: 'You manage to fix the console and use it to lower down the remaining escape pod. 
+You can now access the *escape_pod_launch_console* inside the pod and get out of here.';
 addTriggerAddedObject: escape_pod_launch_console; 
 addTriggerRemovedObject: broken_console.
 
