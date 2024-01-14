@@ -344,7 +344,7 @@ You see a locker, a desk and a bed. You need to act, fast.'
 "doors" 
     "michal" object3 engineering_chief_office_door escape_pods_door
     "olek"
-    "jedrek" security_door cantine_door south_corridor_exit_door
+    "jedrek" security_door cantine_door south_corridor_exit_door void_latch
 
 |
 
@@ -401,6 +401,13 @@ This exit leads out of the living space to the other sections of the ship.
 It should not be locked.
 '.
 south_corridor_exit_door setLocked: false.
+
+" void_latch := DoorObject new.
+cantine_door setName: 'void_latch';
+setDescription:'
+This latch leads outside of the ship, to the cold hard void
+'. "
+
 " JEDREK ITEMS "
 
 " crew bedroom vent"
@@ -478,7 +485,7 @@ desk setPickable: false.
 desk setTriggerItemName: 'desk_key';
 addTriggerAddedObject: crew_access_card; addTriggerRemovedObject: desk.
 desk setTriggerMessage: '
-You unlock the desk and find a *crew_access_card* inside. You take it.
+You unlock the desk.
 '.
 
 
@@ -522,7 +529,7 @@ The supply cabinet is wrapped in a chain and locked with a padlock. There is now
 '.
 supply_cabinet setTriggerItemName: 'hammer';
 setTriggerMessage: '
-You break the padlock with the hammer, and the items inside fall out on the floor.
+You break the padlock with the hammer, easy.
 ';
 addTriggerAddedObject: engineering_chief_access_card; addTriggerRemovedObject: supply_cabinet.
 
@@ -562,6 +569,7 @@ addGameObject: supply_cabinet; addGameObject: flaming_e_box.
 " south_corridor_exit_door setConnection: (Connection newDirection: 'S' to: south_corridor). "
 
 cantine := Room new.
+cantine setName: 'cantine'.
 cantine setDescription: '
 You enter the cantine. It is a rather small room, with a few tables and chairs
 '.
@@ -571,7 +579,11 @@ cantine addGameObject: cyber_key.
 crew_bedroom addConnection: 'E' to: crew_bedroom_vent.
 crew_bedroom_vent addConnection: 'W' to: crew_bedroom.
 security_door setConnection: (Connection newDirection: 'S' to: main_corridor).
+main_corridor addConnection: 'N' to: crew_bedroom.
 cantine_door setConnection: (Connection newDirection: 'E' to: cantine).
+cantine addConnection: 'W' to: main_corridor.
+
+
 "---------------"
 
 engineering_chief_office_door := DoorObject new.
@@ -755,18 +767,18 @@ escape_pods addGameObject: broken_console.
 
 
 " OLEK "
-startCorridor := Room new.
+" startCorridor := Room new.
 startCorridor setName: 'Main Corridor'.
-startCorridor setDescription: 'You are in the corridor. There is an engine room on the South and an exit to The Void on west.'.
+startCorridor setDescription: 'You are in the corridor. There is an engine room on the South and an exit to The Void on west.'. "
 
 engineRoomDashboard := InteractibleObject new.
 engineRoomDashboard setName: 'engineRoomDashboard'.
 engineRoomDashboard setDescription: 'A dashboard with a lot of buttons and switches. It seems to be used to control the engines.'.
 
-cyberKey := GameObject new.
-cyberKey setName: 'cyberKey'.
-cyberKey setDescription: 'A keycard with a picture of a cybernetic eye on it'.
-cyberKey setPickable: true.
+" cyber_key := GameObject new.
+cyber_key setName: 'cyber_key'.
+cyber_key setDescription: 'A keycard with a picture of a cybernetic eye on it'.
+cyber_key setPickable: true. "
 
 spaceSuitSchema := GameObject new.
 spaceSuitSchema setName: 'spaceSuitSchema'.
@@ -796,6 +808,10 @@ serviceRoomLockedCrate setUseCallback: [
 engineRoom := Room new.
 engineRoom setName: 'Engine Room'.
 engineRoom setDescription: 'The engine room is where the station''s engines are located. To access rest of the ship on the south, you must somehow lower the bridge to cross the big gap.'.
+engineRoom addConnection: 'N' to: main_corridor.
+
+south_corridor_exit_door setConnection: (Connection newDirection: 'S' to: engineRoom).
+
 
 serviceRoom := Room new.
 serviceRoom setName: 'Service Room'.
@@ -825,10 +841,10 @@ serviceRoom addGameObject: serviceRoomLocker; addGameObject: serviceRoomLockedCr
 
 engineVentRoomDeadEnd addConnection: 'S' to: engineVentRoom.
 
-engineRoom addConnection: 'N' to: startCorridor.
+engineRoom addConnection: 'N' to: main_corridor.
 engineRoom addGameObject: engineRoomDashboard.
 
-engineRoomDashboard setTriggerItemName: 'cyberKey'.
+engineRoomDashboard setTriggerItemName: 'cyber_key'.
 engineRoomDashboard setUseCallback: [
     Transcript show: 'The key seemes to fit perfectly, you hear a loud noise, and the bridge starts lowering down...'; cr; show: 'It is making a loud noise, engine room must have really taken a lot of damage.'; cr; show: 'SNAP! The bridge broke down, and fell to the bottom. On its way it made a hole in nearby vent'; cr.
     engineRoom addConnection: 'W' to: engineVentRoom.
@@ -861,13 +877,8 @@ voidRoom setDescription: 'From the outside you can really see the scale of the d
 
 voidRoom addGameObject: grappler.
 
-voidRoom addConnection: 'E' to: startCorridor.
-startCorridor addConnection: 'W' to: voidRoom.
-startCorridor addConnection: 'S' to: engineRoom.
-startCorridor addGameObject: cyberKey.
-
-
-
+voidRoom addConnection: 'S' to: crew_bedroom_vent.
+crew_bedroom_vent addConnection: 'N' to: voidRoom.
 
 
 
@@ -876,9 +887,9 @@ game := Game new.
 game setCurrentRoom: crew_bedroom.
 game run.
 
-" pick cyberKey
+" pick cyber_key
 move S
-use cyberKey on engineRoomDashboard
+use cyber_key on engineRoomDashboard
 move W
 move S
 move S
