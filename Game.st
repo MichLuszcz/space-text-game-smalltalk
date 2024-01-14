@@ -287,7 +287,7 @@ Object subclass: Game [
     "olek"
     "jedrek" security_door cantine_door south_corridor_exit_door
 
-
+|
 
 
 FileStream fileIn: 'GameObjects.st'.
@@ -327,11 +327,11 @@ setName: 'security_door';
 setDescription: 'The door leading out of your room to the main corridor remains locked. You need your own *crew_access_card* to unlock it.'.
 
 cantine_door := DoorObject new.
-setName: 'cantine_door';
+cantine_door setName: 'cantine_door';
 setDescription: 'This door leads to the cantine. It is not locked with any lock.'.
 
 south_corridor_exit_door := DoorObject new.
-setName: 'south_corridor_exit_door';
+south_corridor_exit_door setName: 'south_corridor_exit_door';
 setDescription: 'This exit leads out of the living space to the other sections of the ship. \nIt should not be locked.'.
 
 " JEDREK ITEMS "
@@ -385,18 +385,18 @@ cyber_key setPickable: true.
 
 desk := UnlockableObject new.
 desk setName: 'desk'.
-setDescription: 'The desk is locked. There should be a key on it, but maybe it flew somewhere during the crash.'.
+desk setDescription: 'The desk is locked. There should be a key on it, but maybe it flew somewhere during the crash.'.
 desk setLocked: true.
 desk setPickable: false.
 desk setTriggerItemName: 'desk_key';
-desk addTriggerAddedObject: crew_access_card; addTriggerRemovedObject: desk.
+addTriggerAddedObject: crew_access_card; addTriggerRemovedObject: desk.
 desk setTriggerMessage: 'You unlock the desk and find a *crew_access_card* inside. You take it.'.
 
 
 bed := InteractibleObject new.
 bed setName: 'bed'.
-setDescription: 'There is nothing special on this bed, aside from a Thick_Blanket. I wonder if it could be useful later.'.
-desk addTriggerAddedObject: thick_blanket; addTriggerRemovedObject: bed.
+bed setDescription: 'There is nothing special on this bed, aside from a Thick_Blanket. I wonder if it could be useful later.'.
+bed addTriggerAddedObject: thick_blanket; addTriggerRemovedObject: bed.
 
 
 locker := UnlockableObject new.
@@ -421,7 +421,7 @@ flaming_e_box addTriggerAddedObject: cantine_door; addTriggerAddedObject: south_
 supply_cabinet := UnlockableObject new.
 supply_cabinet setName: 'supply_cabinet'.
 supply_cabinet setDescription: 'The supply cabinet is wrapped in a chain and locked with a padlock. There is now way there is a key here.'.
-setTriggerItemName: 'hammer';
+supply_cabinet setTriggerItemName: 'hammer';
 setTriggerMessage: 'You break the padlock with the hammer, and the items inside fall out on the floor.';
 addTriggerAddedObject: engineering_chief_access_card; addTriggerRemovedObject: supply_cabinet.
 
@@ -430,19 +430,19 @@ addTriggerAddedObject: engineering_chief_access_card; addTriggerRemovedObject: s
 " JEDREK ROOMS "
 
 crew_bedroom := Room new.
-crew_bedroom setDescription: 'You are in the crew bedroom, there is a security door on the south, and a vent entrance on the east.'
+crew_bedroom setDescription: 'You are in the crew bedroom, there is a security door on the south, and a vent entrance on the east.'.
 crew_bedroom addGameObject: security_door; addGameObject: desk; addGameObject: bed; addGameObject: locker.
 crew_bedroom addConnection: 'E' to: crew_bedroom_vent.
 
 security_door setConnection: (Connection newDirection: 'S' to: main_corridor).
 
 crew_bedroom_vent := Room new.
-crew_bedroom_vent setDescription: 'You crawl into a rather spatious crew bedroom vent. There it is! This is where you desk_key went! Good thing it didnt fall deeper or you would be stuck in here for ever.'
+crew_bedroom_vent setDescription: 'You crawl into a rather spatious crew bedroom vent. There it is! This is where you desk_key went! Good thing it didnt fall deeper or you would be stuck in here for ever.'.
 crew_bedroom_vent addGameObject: desk_key.
 
 main_corridor := Room new.
-main_corridor setDescription: 'You decide its finally time to leave your quarters. Staying here definetely wont help you find out whats going on. \nYou enter the main corridor, but you can barely see anything. You can see the reason now why the alarms are going off. \nA fire is raging only a few meters in front of you. 'Probably just an overcharged e-box' - your engineer's instinct tells you. However you still can't pass through it. You need to find a way to put it out. \nBehind your back, at the west end, there is a supply cabinet, but the east end of the corridor lays behind the fire. '
-main_corridor addGameObject: locker; addGameObject : flaming_e_box.
+main_corridor setDescription: 'sth';
+addGameObject: supply_cabinet; addGameObject: flaming_e_box.
 
 cantine_door setConnection: (Connection newDirection: 'E' to: cantine).
 " south_corridor_exit_door setConnection: (Connection newDirection: 'S' to: south_corridor). "
