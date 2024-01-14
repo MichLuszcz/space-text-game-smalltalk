@@ -215,10 +215,67 @@ Object subclass: Game [
                 isUnknown := false
             ].
 
+            words first = 'type' & words size = 3 ifTrue: [
+                |code spaceSuitHelmet spaceSuitJacket spaceSuitTrousers|
+                code := words last.
+                (currentRoom findObjectByName: 'serviceRoomLockedCrate') = nil ifFalse: [
+                    code = '9922' ifTrue: [
+                        Transcript show: 'You guessed the code! Crate opened and inside there are space suit parts.'; cr.
+
+                        spaceSuitHelmet := GameObject new.
+                        spaceSuitHelmet setName: 'spaceSuitHelmet'.
+                        spaceSuitHelmet setDescription: 'A helmet for a spacesuit.'.
+                        spaceSuitHelmet setPickable: true.
+
+                        spaceSuitJacket := GameObject new.
+                        spaceSuitJacket setName: 'spaceSuitJacket'.
+                        spaceSuitJacket setDescription: 'A jacket for a spacesuit.'.
+                        spaceSuitJacket setPickable: true.
+
+                        spaceSuitTrousers := GameObject new.
+                        spaceSuitTrousers setName: 'spaceSuitTrousers'.
+                        spaceSuitTrousers setDescription: 'Trousers for a spacesuit.'.
+                        spaceSuitTrousers setPickable: true.
+
+                        currentRoom addGameObject: spaceSuitHelmet; addGameObject: spaceSuitJacket; addGameObject: spaceSuitTrousers.
+                        currentRoom removeGameObject: (currentRoom findObjectByName: 'serviceRoomLockedCrate').
+                    ] ifFalse: [
+                        Transcript show: 'Wrong code.'; cr.
+                    ].
+                ] ifTrue: [
+                    Transcript show: 'There is no such object in this room.'; cr.
+                ].
+                isUnknown := false.
+            ].
+
             "craft spacesuit TODO"
             words first = 'craft' ifTrue: [
-                self printInstructions.
-                Transcript show: 'sysy knyszy'; cr.
+                |part1 part2 part3 spaceSuit|
+                part1 := words at: 2 ifAbsent: [nil].
+                part2 := words at: 3 ifAbsent: [nil].
+                part3 := words at: 4 ifAbsent: [nil].
+
+                (part1 = 'spaceSuitHelmet' & part2 = 'spaceSuitJacket' & part3 = 'spaceSuitTrousers') ifTrue: [
+                    Transcript show: 'dddddddddddddddd!'; cr.
+                    ((self findObjectInInventory: 'spaceSuitHelmet') = nil) | ((self findObjectInInventory: 'spaceSuitHelmet') = nil) | ((self findObjectInInventory: 'spaceSuitHelmet') = nil) ifTrue: [
+                        Transcript show: 'You don''t have all the parts.'; cr.
+                    ] ifFalse: [
+                        Transcript show: 'You have crafted a spacesuit!'; cr.
+
+                        spaceSuit := GameObject new.
+                        spaceSuit setName: 'spaceSuit'.
+                        spaceSuit setDescription: 'A spacesuit.'.
+                        spaceSuit setPickable: true.
+                        currentRoom addGameObject: spaceSuit.
+
+                        inventory remove: (self findObjectInInventory: 'spaceSuitHelmet').
+                        inventory remove: (self findObjectInInventory: 'spaceSuitJacket').
+                        inventory remove: (self findObjectInInventory: 'spaceSuitTrousers').
+                    ].
+                ] ifFalse: [
+                    Transcript show: 'You don''t have all the parts.'; cr.
+                ].
+
                 isUnknown := false
             ].
 
@@ -525,6 +582,15 @@ serviceRoomLocker addTriggerAddedObject: uvFlashlight.
 serviceRoomLocker addTriggerAddedObject: spaceSuitSchema.
 serviceRoomLocker setLocked: false.
 
+serviceRoomLockedCrate := InteractibleObject new.
+serviceRoomLockedCrate setName: 'serviceRoomLockedCrate'.
+serviceRoomLockedCrate setDescription: 'A crate with an electronic padlock. It requires 4 numbers to open. (ex. "type code 1234")'.
+serviceRoomLockedCrate setPickable: false.
+serviceRoomLockedCrate setTriggerItemName: 'uvFlashlight'.
+serviceRoomLockedCrate setUseCallback: [
+    Transcript show: 'You use the flashlight on the padlock, only 9 and 2 have fingerprints on them.'; cr.
+].
+
 engineRoom := Room new.
 engineRoom setName: 'engineRoom'.
 engineRoom setDescription: 'The engine room is where the station''s engines are located. To access rest of the ship on the south, you must somehow lower the bridge to cross the big gap.'.
@@ -532,6 +598,8 @@ engineRoom setDescription: 'The engine room is where the station''s engines are 
 serviceRoom := Room new.
 serviceRoom setName: 'serviceRoom'.
 serviceRoom setDescription: 'You are in the service room, It was used by ships technicians.'.
+serviceRoom addConnection: 'N' to: engineVentRoomExit.
+serviceRoom addGameObject: serviceRoomLocker; addGameObject: serviceRoomLockedCrate.
 
 engineVentRoom := Room new.
 engineVentRoom setName: 'engineVentRoom'.
@@ -550,6 +618,7 @@ engineVentRoom addConnection: 'N' to: engineVentRoomDeadEnd.
 engineVentRoom addConnection: 'S' to: engineVentRoomExit.
 
 engineVentRoomExit addConnection: 'N' to: engineVentRoom.
+engineVentRoomExit addConnection: 'S' to: serviceRoom.
 
 engineVentRoomDeadEnd addConnection: 'S' to: engineVentRoom.
 
@@ -570,7 +639,17 @@ engineRoomDashboard setUseCallback: [
 
 
 
-
 game := Game new.
 game setCurrentRoom: engineRoom.
 game run.
+
+" pick cyberKey
+use cyberKey on engineRoomDashboard
+move W
+move S
+move S
+type code 9922
+pick spaceSuitHelmet
+pick spaceSuitJacket
+pick spaceSuitTrousers
+craft spaceSuitHelmet spaceSuitJacket spaceSuitTrousers "
