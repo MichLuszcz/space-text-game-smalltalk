@@ -144,10 +144,17 @@ InteractibleObject subclass: UnlockableObject [
         ].
     ]
 
+    UnlockableObject >> setOpenMessage: newMessage [
+        openMessage := newMessage.
+    ]
+
     UnlockableObject >> open: currentRoom [
         locked ifFalse: [
             triggerAddedObjects do: [ :object |
                 currentRoom addGameObject: object.
+            ].
+            triggerRemovedObjects do: [ :object |
+                currentRoom removeGameObject: object
             ].
             Transcript show: openMessage; nl.
         ] ifTrue: [
@@ -173,10 +180,6 @@ UnlockableObject subclass: DoorObject [
         ^self
     ]
 
-    DoorObject >> setOpenMessage: newMessage [
-        openMessage := newMessage.
-    ]
-
     DoorObject >> setConnetion: newConnection [
         connection := newConnection. " class = Connection"
     ]
@@ -187,7 +190,7 @@ UnlockableObject subclass: DoorObject [
             Transcript show: openMessage; nl.
             "currentRoom removeGameObject: self."
         ] ifTrue: [
-            Transcript show: 'You have to unlock it first!'.
+            Transcript show: 'You have to unlock it first!'; nl.
         ].
     ]
 
