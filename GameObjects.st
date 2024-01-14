@@ -190,7 +190,7 @@ UnlockableObject subclass: DoorObject [
             Transcript show: openMessage; nl.
             "currentRoom removeGameObject: self."
         ] ifTrue: [
-            Transcript show: 'You have to unlock it first!'.
+            Transcript show: 'You have to unlock it first!'; nl.
         ].
     ]
 
