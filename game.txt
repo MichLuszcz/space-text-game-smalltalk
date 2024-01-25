@@ -1,0 +1,661 @@
+"Global garbage collection... done"
+A loud crashing sound wakes you up in you bed inside the engineering crew bedroom.
+You look around and see that the room is in a mess.
+A vent in the east corner of the room swings wide open.
+Blaring alarms can be heard from the main corridor on the south side.
+You see a locker, a desk and a bed. You need to act, fast.
+
+Available commands are:
+
+instructions           -- see these instructions.
+move W/E/S/N           -- move west/est/south/north
+pick {item name}       -- pick up an item
+inspect {item name}    -- inspect an item
+open {item name}       -- open something
+use {your item} on {item in the room} -- use an item from your inventory on something you see
+look                   -- look around the room
+check inventory        -- list out your inventory
+check exits            -- see available exits
+craft {item1} {item2} {item3}  -- combine items into a new one
+quit                   -- to end the game and quit.
+> check exits
+Direction: E To: crew_bedroom_vent
+> move E
+Moved to crew_bedroom_vent
+> look
+Room: crew_bedroom_vent
+
+You crawl into a rather spatious crew bedroom vent. There it is! This is where you desk_key went!
+Good thing it didnt fall deeper or you would be stuck in here for ever.
+
+
+In the room you see the following items:
+desk_key.
+> pick desk_key
+Picked up.
+> move W
+Moved to crew_bedroom
+> look
+Room: crew_bedroom
+
+You are in the crew bedroom, there is a security door on the south, and a vent entrance on the east.
+
+
+In the room you see the following items:
+security_door.
+desk.
+thick_blanket.
+locker.
+> check exits
+Direction: E To: crew_bedroom_vent
+> open desk
+You have to unlock it first!
+> use desk_key desk
+Unknown command.
+
+> use desk_key on desk
+
+You unlock the desk.
+
+> open desk
+You open it
+> look
+Room: crew_bedroom
+
+You are in the crew bedroom, there is a security door on the south, and a vent entrance on the east.
+
+
+In the room you see the following items:
+security_door.
+thick_blanket.
+locker.
+crew_access_card.
+> pick crew_access_card
+Picked up.
+> pick thick_blanket
+Picked up.
+> inspect locker
+
+A locker. It is not s locked. It might contain something useful.
+
+> open locker
+
+Your locker in your room, its unlocked so you might find something useful.
+
+> inspect locker
+There is no such object in this room.
+> look
+Room: crew_bedroom
+
+You are in the crew bedroom, there is a security door on the south, and a vent entrance on the east.
+
+
+In the room you see the following items:
+security_door.
+hammer.
+> pick hammer
+Picked up.
+> open security_door
+You have to unlock it first!
+> use crew_access_card on security_door
+You unlock it.
+> open security_door
+You open the door
+> check exits
+Direction: E To: crew_bedroom_vent
+Direction: S To: main_corridor
+> move S
+Moved to main_corridor
+> look
+Room: main_corridor
+
+You decide its finally time to leave your quarters. Staying here definetely wont help you find out whats going on.
+You enter the main corridor, but you can barely see anything.
+You can see the reason now why the alarms are going off.
+A fire is raging only a few meters in front of you. Probably just an overcharged e-box - your engineers instinct tells you.
+However you still cant pass through it. You need to find a way to put it out.
+Behind your back, at the west end, there is a supply cabinet, but the east end of the corridor lays behind the fire.
+
+
+In the room you see the following items:
+supply_cabinet.
+flaming_e_box.
+> use thick_blanket on flaming_e_box
+
+You throw the blanket on the fire, putting it out. The smoke clears out and the room becomes visible again
+
+> look
+Room: main_corridor
+
+You decide its finally time to leave your quarters. Staying here definetely wont help you find out whats going on.
+You enter the main corridor, but you can barely see anything.
+You can see the reason now why the alarms are going off.
+A fire is raging only a few meters in front of you. Probably just an overcharged e-box - your engineers instinct tells you.
+However you still cant pass through it. You need to find a way to put it out.
+Behind your back, at the west end, there is a supply cabinet, but the east end of the corridor lays behind the fire.
+
+
+In the room you see the following items:
+supply_cabinet.
+cantine_door.
+south_corridor_exit_door.
+> inpsect supply_cabinet
+Unknown command.
+
+> inspect supply_cabinet
+
+The supply cabinet is wrapped in a chain and locked with a padlock. There is now way there is a key here.
+
+> use hammer on supply_cabinet
+
+You break the padlock with the hammer, easy.
+
+> inspect supply_cabinet
+
+The supply cabinet is wrapped in a chain and locked with a padlock. There is now way there is a key here.
+
+> look
+Room: main_corridor
+
+You decide its finally time to leave your quarters. Staying here definetely wont help you find out whats going on.
+You enter the main corridor, but you can barely see anything.
+You can see the reason now why the alarms are going off.
+A fire is raging only a few meters in front of you. Probably just an overcharged e-box - your engineers instinct tells you.
+However you still cant pass through it. You need to find a way to put it out.
+Behind your back, at the west end, there is a supply cabinet, but the east end of the corridor lays behind the fire.
+
+
+In the room you see the following items:
+supply_cabinet.
+cantine_door.
+south_corridor_exit_door.
+> open supply_cabinet
+You open it
+> look
+Room: main_corridor
+
+You decide its finally time to leave your quarters. Staying here definetely wont help you find out whats going on.
+You enter the main corridor, but you can barely see anything.
+You can see the reason now why the alarms are going off.
+A fire is raging only a few meters in front of you. Probably just an overcharged e-box - your engineers instinct tells you.
+However you still cant pass through it. You need to find a way to put it out.
+Behind your back, at the west end, there is a supply cabinet, but the east end of the corridor lays behind the fire.
+
+
+In the room you see the following items:
+cantine_door.
+south_corridor_exit_door.
+engineering_chief_access_card.
+> pick engineering_chief_access_card
+Picked up.
+> look
+Room: main_corridor
+
+You decide its finally time to leave your quarters. Staying here definetely wont help you find out whats going on.
+You enter the main corridor, but you can barely see anything.
+You can see the reason now why the alarms are going off.
+A fire is raging only a few meters in front of you. Probably just an overcharged e-box - your engineers instinct tells you.
+However you still cant pass through it. You need to find a way to put it out.
+Behind your back, at the west end, there is a supply cabinet, but the east end of the corridor lays behind the fire.
+
+
+In the room you see the following items:
+cantine_door.
+south_corridor_exit_door.
+> check exits
+Direction: N To: crew_bedroom
+> open cantine_door
+You open the door
+> check exits
+Direction: E To: cantine
+Direction: N To: crew_bedroom
+> move E
+Moved to cantine
+> look
+Room: cantine
+
+You enter the cantine. It is a rather small room, with a few tables and chairs
+
+
+In the room you see the following items:
+cyber_key.
+> pick cyber_key
+Picked up.
+> move W
+Moved to main_corridor
+> check exits
+Direction: E To: cantine
+Direction: N To: crew_bedroom
+> look
+Room: main_corridor
+
+You decide its finally time to leave your quarters. Staying here definetely wont help you find out whats going on.
+You enter the main corridor, but you can barely see anything.
+You can see the reason now why the alarms are going off.
+A fire is raging only a few meters in front of you. Probably just an overcharged e-box - your engineers instinct tells you.
+However you still cant pass through it. You need to find a way to put it out.
+Behind your back, at the west end, there is a supply cabinet, but the east end of the corridor lays behind the fire.
+
+
+In the room you see the following items:
+cantine_door.
+south_corridor_exit_door.
+> open south_corridor_exit_door.
+There is no such object in this room.
+> open south_corridor_exit_door
+You open the door
+> look
+Room: main_corridor
+
+You decide its finally time to leave your quarters. Staying here definetely wont help you find out whats going on.
+You enter the main corridor, but you can barely see anything.
+You can see the reason now why the alarms are going off.
+A fire is raging only a few meters in front of you. Probably just an overcharged e-box - your engineers instinct tells you.
+However you still cant pass through it. You need to find a way to put it out.
+Behind your back, at the west end, there is a supply cabinet, but the east end of the corridor lays behind the fire.
+
+
+In the room you see the following items:
+cantine_door.
+south_corridor_exit_door.
+> move S
+Moved to Engine Room
+> look
+Room: Engine Room
+The engine room is where the station's engines are located. To access rest of the ship on the south, you must somehow lower the bridge to cross the big gap.
+
+In the room you see the following items:
+engineRoomDashboard.
+> inspect engineRoomDashboard
+A dashboard with a lot of buttons and switches. It seems to be used to control the engines.
+> use cyber_key on engineRoomDashboard
+You know how to use it
+The key seemes to fit perfectly, you hear a loud noise, and the bridge starts lowering down...
+It is making a loud noise, engine room must have really taken a lot of damage.
+SNAP! The bridge broke down, and fell to the bottom. On its way it made a hole in nearby vent
+> look
+Room: Engine Room
+Bridge felt down, you must find some other way to cross the gap. On Its way down, It opened and entrance to the nearby vent, which looks like it could be crawled into.
+
+In the room you see the following items:
+bridgeGap.
+> check exits
+Direction: N To: main_corridor
+Direction: W To: Engine Vent Entrance
+> move W
+Moved to Engine Vent Entrance
+> look
+Room: Engine Vent Entrance
+It's freezing cold in here. You can choose to explore further south or north.
+
+In the room you see the following items:
+> check exits
+Direction: E To: Engine Room
+Direction: S To: Engine Vent South Path
+Direction: N To: Engine Vent Noth Path
+> move S
+Moved to Engine Vent South Path
+> look
+Room: Engine Vent South Path
+After long crawl there seems to be an exit.
+
+In the room you see the following items:
+> check exits
+Direction: S To: Service Room
+Direction: N To: Engine Vent Entrance
+> move S
+Moved to Service Room
+> look
+Room: Service Room
+You are in the service room, It was used by ships technicians.
+
+In the room you see the following items:
+serviceRoomLocker.
+serviceRoomLockedCrate.
+> open serviceRoomLocker
+You open it
+> look
+Room: Service Room
+You are in the service room, It was used by ships technicians.
+
+In the room you see the following items:
+serviceRoomLocker.
+serviceRoomLockedCrate.
+uvFlashlight.
+spaceSuitSchema.
+> inspect spaceSuitSchema
+To assemble the working spacesuit, you will need: spaceSuitHelmet, speceSuitJacket, spaceSuitTrousers
+> pick uvFlashlight
+Picked up.
+> inspect serviceRoomLockedCrate
+A crate with an electronic padlock. It requires 4 numbers to open. (ex. "type code 1234")
+> type code 1234
+Wrong code.
+> use uvFlashlight on serviceRoomLockedCrate
+You know how to use it
+You use the flashlight on the padlock, only 9 and 2 have fingerprints on them.
+> type code 9922
+You guessed the code! Crate opened and inside there are space suit parts.
+> look
+Room: Service Room
+You are in the service room, It was used by ships technicians.
+
+In the room you see the following items:
+serviceRoomLocker.
+spaceSuitSchema.
+spaceSuitHelmet.
+spaceSuitJacket.
+spaceSuitTrousers.
+> pick spaceSuitHelmet
+Picked up.
+> pick spaceSuitJacket
+Picked up.
+> pick spaceSuitTrousers
+Picked up.
+> look
+Room: Service Room
+You are in the service room, It was used by ships technicians.
+
+In the room you see the following items:
+serviceRoomLocker.
+spaceSuitSchema.
+> inspect spaceSuitSchema
+To assemble the working spacesuit, you will need: spaceSuitHelmet, speceSuitJacket, spaceSuitTrousers
+> craft spaceSuitHelmet spaceSuitJacket spaceSuitTrousers
+You have crafted a spacesuit!
+> look
+Room: Service Room
+You are in the service room, It was used by ships technicians.
+
+In the room you see the following items:
+serviceRoomLocker.
+spaceSuitSchema.
+spaceSuit.
+> pick spaceSuit
+Picked up.
+> check exits
+Direction: N To: Engine Vent South Path
+> move N
+Moved to Engine Vent South Path
+> move N
+Moved to Engine Vent Entrance
+> check exits
+Direction: E To: Engine Room
+Direction: S To: Engine Vent South Path
+Direction: N To: Engine Vent Noth Path
+> move E
+Moved to Engine Room
+> check exits
+Direction: N To: main_corridor
+Direction: W To: Engine Vent Entrance
+> move W
+Moved to Engine Vent Entrance
+> move W
+You can't go that way.
+> check exits
+Direction: E To: Engine Room
+Direction: S To: Engine Vent South Path
+Direction: N To: Engine Vent Noth Path
+> move E
+Moved to Engine Room
+> move N
+Moved to main_corridor
+> check exits
+Direction: E To: cantine
+Direction: S To: Engine Room
+Direction: N To: crew_bedroom
+> move N
+Moved to crew_bedroom
+> move E
+Moved to crew_bedroom_vent
+> look
+Room: crew_bedroom_vent
+
+You crawl into a rather spatious crew bedroom vent. There it is! This is where you desk_key went!
+Good thing it didnt fall deeper or you would be stuck in here for ever.
+
+
+In the room you see the following items:
+> check exits
+Direction: N To: The Void
+Direction: W To: crew_bedroom
+> move N
+Moved to The Void
+> look
+Room: The Void
+From the outside you can really see the scale of the destruction, something must have hit the ship really hard. Look around maybe technicians have left something usefull in here.
+
+In the room you see the following items:
+grappler.
+> pick grappler
+Picked up.
+> move S
+Moved to crew_bedroom_vent
+> move W
+Moved to crew_bedroom
+> move S
+Moved to main_corridor
+> move E
+Moved to cantine
+> move W
+Moved to main_corridor
+> move S
+Moved to Engine Room
+> look
+Room: Engine Room
+Bridge felt down, you must find some other way to cross the gap. On Its way down, It opened and entrance to the nearby vent, which looks like it could be crawled into.
+
+In the room you see the following items:
+bridgeGap.
+> use grappler on bridgeGap
+You know how to use it
+You use the grappler to cross the gap.
+> look
+Room: Engine Room
+Grappler allows you to easily cross the gap.
+
+In the room you see the following items:
+> check exits
+Direction: S To: workshop
+Direction: N To: main_corridor
+Direction: W To: Engine Vent Entrance
+> move S
+Moved to workshop
+> look
+Room: workshop
+The workshop is where most engineering on the station happens.
+A door North leads to the engineering chiefs office, a South one to the escape pods
+
+In the room you see the following items:
+engineering_chief_office_door.
+table.
+small_fire.
+alien_mass.
+workshop_window.
+toolbox.
+> inspect toolbox
+Standard-issue toolbox. It's unlocked
+> open toolbox
+Toolbox opened, you see a *hand_saw* and *electrical_tools*. The saw seems to be covered in rust, but it might be good for a single use.
+> look
+Room: workshop
+The workshop is where most engineering on the station happens.
+A door North leads to the engineering chiefs office, a South one to the escape pods
+
+In the room you see the following items:
+engineering_chief_office_door.
+table.
+small_fire.
+alien_mass.
+workshop_window.
+hand_saw.
+electrical_tools.
+> pick electrical_tools
+Picked up.
+> pick hand_saw
+Picked up.
+> check inventory
+Inventory:
+engineering_chief_access_card.
+spaceSuit.
+electrical_tools.
+hand_saw.
+> use engineering_chief_access_card on engineering_chief_office_door
+You unlock it.
+> check exits
+> open engineering_chief_office_door
+You open the door
+> chec exits
+Unknown command.
+
+> check exits
+Direction: N To: engineering_chief_office
+> move N
+Moved to engineering_chief_office
+> look
+Room: engineering_chief_office
+The office is in heavy disarray. A closed computer sits on the desk.
+Next to one of the bookshelves lays a broken glass table. Something heavy must've fallen on it from one of the shelves.
+
+In the room you see the following items:
+metal_statue.
+closed_computer.
+> open closed_computer
+You open the closed computer sitting on the desk. You find an open email titled ESCAPE POD CODE UPDATE:
+Hi, Qaux'ods, please remember about the annual escape pod tests. We've changed all the codes to *1867* for this week to make the process easier.
+Please have the report done by next week. Cheers
+> look
+Room: engineering_chief_office
+The office is in heavy disarray. A closed computer sits on the desk.
+Next to one of the bookshelves lays a broken glass table. Something heavy must've fallen on it from one of the shelves.
+
+In the room you see the following items:
+metal_statue.
+opened_computer.
+code_1867.
+> pick code_1867
+Picked up.
+> pick metal_statue
+Picked up.
+> check exits
+Direction: S To: workshop
+> move S
+Moved to workshop
+> look
+Room: workshop
+The workshop is where most engineering on the station happens.
+A door North leads to the engineering chiefs office, a South one to the escape pods
+
+In the room you see the following items:
+engineering_chief_office_door.
+table.
+small_fire.
+alien_mass.
+workshop_window.
+> use hand_saw on table
+You manage to sever the loose leg with your saw.
+A *wooden_table_leg* lies on the floor
+> look
+Room: workshop
+The workshop is where most engineering on the station happens.
+A door North leads to the engineering chiefs office, a South one to the escape pods
+
+In the room you see the following items:
+engineering_chief_office_door.
+small_fire.
+alien_mass.
+workshop_window.
+wooden_table_leg.
+> pick wooden_table_leg
+Picked up.
+> use wooden_table_leg on small_fire
+You leave the table leg near the fire until it catches fire, creating a *makeshift_torch*
+> look
+Room: workshop
+The workshop is where most engineering on the station happens.
+A door North leads to the engineering chiefs office, a South one to the escape pods
+
+In the room you see the following items:
+engineering_chief_office_door.
+small_fire.
+alien_mass.
+workshop_window.
+makeshift_torch.
+> pick makeshift_torch
+Picked up.
+> look
+Room: workshop
+The workshop is where most engineering on the station happens.
+A door North leads to the engineering chiefs office, a South one to the escape pods
+
+In the room you see the following items:
+engineering_chief_office_door.
+small_fire.
+alien_mass.
+workshop_window.
+> inspect alien_mass
+A strange black mass near the *workshop_window* blocks the path south. It pulsates slightly, as if breathing.
+Underneath it you see one of your colleagues being slowly absorbed by what you assume to be some kind of alien intruder.
+A familiar smell of fuel fumes seems to be emanating from the creature.
+It might be flammable
+> use makeshift_torch on alien_mass
+The alien mass burns away, revealing a door to the South leading to the escape pods!
+> look
+Room: workshop
+The workshop is where most engineering on the station happens.
+A door North leads to the engineering chiefs office, a South one to the escape pods
+
+In the room you see the following items:
+engineering_chief_office_door.
+small_fire.
+workshop_window.
+escape_pods_door.
+> open escape_pods_door
+You open the door
+> check exits
+Direction: S To: escape_pods
+Direction: N To: engineering_chief_office
+> move S
+Moved to escape_pods
+> look
+Room: escape_pods
+This room is designed to hold the emergency evacuation modules for the engineering staff.
+All of them have either already been deployed, or are now covered in an alien, dark grey substance similar to the one that blocked the entrance to this room.
+All except for one. You have to move fast. The pods must first be lowered using the console.
+Then, once inside one of the pods, access to launch has to be granted by entering a code known to the managers of a given branch of the station.
+
+In the room you see the following items:
+broken_console.
+> inspect broken_console
+A console used for lowering the escape pods, broken. Looks like it short-circuited.
+You spot some black matter between the wires. This must be what caused the break.
+Needs specialized tools to be fixed.
+> check inventory
+Inventory:
+spaceSuit.
+electrical_tools.
+code_1867.
+metal_statue.
+> use electrical_tools on broken_console
+You manage to fix the console and use it to lower down the remaining escape pod.
+You can now access the *escape_pod_launch_console* inside the pod and get out of here.
+> look
+Room: escape_pods
+This room is designed to hold the emergency evacuation modules for the engineering staff.
+All of them have either already been deployed, or are now covered in an alien, dark grey substance similar to the one that blocked the entrance to this room.
+All except for one. You have to move fast. The pods must first be lowered using the console.
+Then, once inside one of the pods, access to launch has to be granted by entering a code known to the managers of a given branch of the station.
+
+In the room you see the following items:
+escape_pod_launch_console.
+> use code_1867 on escape_pod_launch_console
+You punch in the code. The door to the pod closes behind you and you hear a robotic voice come from the console:
+Voice: Launch sequence initiated. Please take a seat and fasten your seatbelts.
+
+You sit down and hope for the best. After a 20 second countdown the pod begins to shake and propels itself out of the station.
+You made it. As you're leaving the station you see the ship is covered in a moving blanket of black material.
+You live to tell the tale. You try contacting the closest colony and explain the situation. You get permission for emergency landing.
+Congratulations! You managed to escape the station!
+
+Type "quit" to end the game.
+>

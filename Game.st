@@ -25,10 +25,10 @@ Object subclass: Game [
     | isGameOver inventory currentRoom|
 
     introductionText := #(
-        'A loud crashing sound wakes you up in you bed inside the engineering crew bedroom. 
-You look around and see that the room is in a mess. 
-A vent in the east corner of the room swings wide open. 
-Blaring alarms can be heard from the main corridor on the south side. 
+        'A loud crashing sound wakes you up in you bed inside the engineering crew bedroom.
+You look around and see that the room is in a mess.
+A vent in the east corner of the room swings wide open.
+Blaring alarms can be heard from the main corridor on the south side.
 You see a locker, a desk and a bed. You need to act, fast.'
         ''
     ).
@@ -333,16 +333,16 @@ You see a locker, a desk and a bed. You need to act, fast.'
 "rooms"
     "michal" room1 room2 workshop engineering_chief_office escape_pods
     "olek"
-    "jedrek" crew_bedroom crew_bedroom_vent main_corridor cantine 
+    "jedrek" crew_bedroom crew_bedroom_vent main_corridor cantine
 "picakble objects"
     "michal" object1 hand_saw electrical_tools wooden_table_leg metal_statue makeshift_torch code_1867
     "olek"
     "jedrek"  hammer desk_key crew_access_card thick_blanket u_s_t cyber_key
-"room objects" 
+"room objects"
     "michal" object2 alien_mass toolbox small_fire workshop_window table closed_computer opened_computer broken_console escape_pod_launch_console
     "olek"
     "jedrek" desk bed locker supply_cabinet space_latch flaming_e_box eng_chief
-"doors" 
+"doors"
     "michal" object3 engineering_chief_office_door escape_pods_door
     "olek"
     "jedrek" security_door cantine_door south_corridor_exit_door void_latch
