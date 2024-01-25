@@ -13,14 +13,6 @@ Collaborators:
 
 
 
-"TODOs:
-Lock class
-Door class
-implement move directions into Room
-"
-
-
-
 Object subclass: Game [
     | isGameOver inventory currentRoom|
 
@@ -403,12 +395,6 @@ It should not be locked.
 '.
 south_corridor_exit_door setLocked: false.
 
-" void_latch := DoorObject new.
-cantine_door setName: 'void_latch';
-setDescription:'
-This latch leads outside of the ship, to the cold hard void
-'. "
-
 " JEDREK ITEMS "
 
 " crew bedroom vent"
@@ -453,13 +439,6 @@ engineering_chief_access_card setPickable: true.
 
 "------------"
 
-" main corridor "
-
-" u_s_t := GameObject new.
-u_s_t setName: 'u_s_t'.
-u_s_t setDescription: 'An universal speech translator'.
-u_s_t setPickable: true. "
-
 " ------------"
 " cantine"
 
@@ -489,12 +468,6 @@ desk setTriggerMessage: '
 You unlock the desk.
 '.
 
-
-"bed := InteractibleObject new.
-bed setName: 'bed'.
-bed setDescription: 'There is nothing special on this bed, aside from a Thick_Blanket. I wonder if it could be useful later.'.
-bed addTriggerAddedObject: thick_blanket; addTriggerRemovedObject: bed.
-"
 
 locker := UnlockableObject new.
 locker setName: 'locker'.
@@ -736,7 +709,6 @@ addTriggerRemovedObject: broken_console.
 
 
 
-"MICHAL ROOMS"
 workshop := Room new.
 workshop setName: 'workshop'.
 workshop setDescription: 'The workshop is where most engineering on the station happens.
@@ -763,23 +735,9 @@ escape_pods addConnection: 'N' to: workshop.
 escape_pods_door setConnection: (Connection newDirection: 'S' to: escape_pods).
 escape_pods addGameObject: broken_console.
 
-
-"workshop addConnection: 'W' to: engine_room."
-
-
-" OLEK "
-" startCorridor := Room new.
-startCorridor setName: 'Main Corridor'.
-startCorridor setDescription: 'You are in the corridor. There is an engine room on the South and an exit to The Void on west.'. "
-
 engineRoomDashboard := InteractibleObject new.
 engineRoomDashboard setName: 'engineRoomDashboard'.
 engineRoomDashboard setDescription: 'A dashboard with a lot of buttons and switches. It seems to be used to control the engines.'.
-
-" cyber_key := GameObject new.
-cyber_key setName: 'cyber_key'.
-cyber_key setDescription: 'A keycard with a picture of a cybernetic eye on it'.
-cyber_key setPickable: true. "
 
 spaceSuitSchema := GameObject new.
 spaceSuitSchema setName: 'spaceSuitSchema'.

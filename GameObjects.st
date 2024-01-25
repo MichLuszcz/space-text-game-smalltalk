@@ -240,8 +240,3 @@ Object subclass: Connection [
         ^nextRoom
     ]
 ]
-
-
-"TODO: Make Door class
-Locker : has things inside it, if opened will add things to room
-Door: has a direction and another room. If opened, will add connection to current room"
