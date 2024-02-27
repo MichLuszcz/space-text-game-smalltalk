@@ -1,4 +1,4 @@
-Text game written in Smalltalk
+Text game written in Smalltalk, using the object programming paradigm
 
 usage:
 ```shell
